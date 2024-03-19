@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+@await Component.InvokeAsync("_HeadUILayoutComponentPartial")
+
+<body>
+
+    @await Component.InvokeAsync("_NavbarUILayoutComponentPartial")
+
+    @await Component.InvokeAsync("_BottombarUILayoutComponentPartial")
+
+    @await Component.InvokeAsync("_MainSliderComponentPartial")
+
+    @await Component.InvokeAsync("_MainBrandSliderComponentPartial")
+
+    @await Component.InvokeAsync("_MainFeatureComponentPartial")
+
+    @await Component.InvokeAsync("_MainCategoryComponentPartial")
+
+    @await Component.InvokeAsync("_MainFeaturedProductComponentPartial")
+
+    @await Component.InvokeAsync("_MainNewsletterComponentPartial")
+
+    @await Component.InvokeAsync("_MainRecentProductComponentPartial")
+
+    @await Component.InvokeAsync("_MainReviewComponentPartial")
+
+    @await Component.InvokeAsync("_FooterUILayoutComponentPartial")
+
+    @await Component.InvokeAsync("_ScriptUILayoutComponentPartial")
+
+</body>
+</html>
