@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+<!-- Product List Start -->
+<div class="product-view">
+    <div class="container-fluid">
+        <div class="row">
+            @await Component.InvokeAsync("_ProductListComponentPartial")
+
+            <!-- Side Bar Start -->
+            <div class="col-lg-4 sidebar">
+
+                @await Component.InvokeAsync("_ProductCategoryComponentPartial")
+
+                @await Component.InvokeAsync("_ProductWidgetBrandsComponentPartial")
+                
+            </div>
+            <!-- Side Bar End -->
+        </div>
+    </div>
+</div>
+<!-- Product List End -->
+<!-- Brand Start -->
+@await Component.InvokeAsync("_MainBrandSliderComponentPartial")
+<!-- Brand End -->
+

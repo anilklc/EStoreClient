@@ -2,7 +2,7 @@
 
 namespace EStore.UI.ViewComponents.DefaultViewComponents
 {
-    public class _MainSliderComponentPartial : ViewComponent
+    public class _MainPopularCategoryComponentPartial : ViewComponent
     {
         public IViewComponentResult Invoke()
         {

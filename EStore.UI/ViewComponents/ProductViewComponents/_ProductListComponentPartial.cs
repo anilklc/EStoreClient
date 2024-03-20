@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace EStore.UI.ViewComponents.DefaultViewComponents
+namespace EStore.UI.ViewComponents.ProductViewComponents
 {
-    public class _MainCategoryComponentPartial : ViewComponent
+    public class _ProductListComponentPartial : ViewComponent
     {
         public IViewComponentResult Invoke()
         {
