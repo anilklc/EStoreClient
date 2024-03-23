@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace EStore.Dto.Policies
 {
-    public class ResultPolicy
+    public class CreatePolicy
     {
-        public string Id { get; set; }
         public string PolicyName { get; set; }
         public string PolicyDescription { get; set; }
         public string PolicyIcon { get; set; }

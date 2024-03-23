@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using EStore.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace EStore.Services
 {
@@ -23,13 +25,17 @@ namespace EStore.Services
             _httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<List<TEntity>> GetAll(string apiUrl)
+        public async Task<List<TEntity>> GetAll(string apiUrl,string objectName)
         {
             var response = await _httpClient.GetAsync(apiUrl);
             response.EnsureSuccessStatusCode();
 
             var jsonContent = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<List<TEntity>>(jsonContent);
+            JObject jsonObject = JObject.Parse(jsonContent);
+            JArray objectArray = (JArray)jsonObject[objectName];
+            var result = objectArray.ToObject<List<TEntity>>();
+
+            //var result = JsonConvert.DeserializeObject<List<TEntity>>(jsonContent);
 
             return result;
         }
