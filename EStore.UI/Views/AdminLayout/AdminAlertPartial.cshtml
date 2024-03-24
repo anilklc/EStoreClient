@@ -1,0 +1,82 @@
+﻿<style>
+    .alert-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        max-width: 300px;
+    }
+
+    .close {
+        position: absolute;
+        top: 0px; 
+        right: 20px;
+        z-index: 999;
+        padding: .75rem 1.25rem;
+        color: rgba(0, 0, 0, 0.5);
+        background-color: transparent; 
+        border: none;
+    }
+
+    .alert {
+        position: relative;
+        padding: .75rem 1.25rem;
+        margin-bottom: 1rem;
+        border-radius: .25rem;
+        color: #ffffff;
+        max-height: 500px;
+        overflow-y: auto;
+    }
+
+</style>
+
+@{
+    string alertType = TempData["AlertType"]?.ToString();
+    string alertColor = alertType switch
+    {
+        "success" => "green",
+        "error" => "red",
+        "updated" => "orange",
+        _ => "gray"
+    };
+}
+
+@if (!string.IsNullOrEmpty(TempData["AlertMessage"]?.ToString()))
+{
+    <div class="alert-container">
+        <div id="alert" class="alert alert-@alertType alert-dismissible fade show" role="alert" style="background-color: @alertColor; max-height: 500px; overflow-y: auto;">
+            @TempData["AlertMessage"]
+            <button id="close-btn" type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+}
+
+<script>
+    setTimeout(function () {
+        var alert = document.getElementById('alert');
+        if (alert) {
+            alert.classList.remove('show');
+            alert.classList.add('fade');
+            setTimeout(function () {
+                alert.remove();
+            }, 1000);
+        }
+    }, 3000);
+
+
+    var closeBtn = document.getElementById('close-btn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function () {
+            var alert = document.getElementById('alert');
+            if (alert) {
+                alert.classList.remove('show');
+                alert.classList.add('fade');
+                setTimeout(function () {
+                    alert.remove();
+                }, 1000);
+            }
+        });
+    }
+</script>

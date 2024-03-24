@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EStore.Services.Services
 {
-    public class WriteService<TEntity> : IWriteService<TEntity>
+    public class WriteService<TCreateEntity, TUpdateEntity> : IWriteService<TCreateEntity, TUpdateEntity>
     {
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
@@ -24,10 +24,8 @@ namespace EStore.Services.Services
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
-        public async Task<TEntity> AddAsync(TEntity entity, string endpoint)
+        public async Task<TCreateEntity> AddAsync(TCreateEntity entity, string endpoint)
         {
-            if (entity == null)
-                throw new ArgumentNullException(nameof(entity));
 
             var jsonContent = JsonConvert.SerializeObject(entity);
             var response = await _httpClient.PostAsync(endpoint, new StringContent(jsonContent, Encoding.UTF8, "application/json"));
@@ -38,19 +36,36 @@ namespace EStore.Services.Services
             }
 
             var jsonResponse = await response.Content.ReadAsStringAsync();
-            var addedEntity = JsonConvert.DeserializeObject<TEntity>(jsonResponse);
+            var addedEntity = JsonConvert.DeserializeObject<TCreateEntity>(jsonResponse);
 
             return addedEntity;
         }
 
-        public Task DeleteAsync(string id, string endpoint)
+        public async Task DeleteAsync(string id, string endpoint)
         {
-            throw new NotImplementedException();
+            var response = await _httpClient.DeleteAsync($"{endpoint}{id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Failed to deleted entity. Status code: {response.StatusCode}");
+
+            }
         }
 
-        public Task<TEntity> UpdateAsync(string id, TEntity entity, string endpoint)
+        public async Task<TUpdateEntity> UpdateAsync(TUpdateEntity entity, string endpoint)
         {
-            throw new NotImplementedException();
+            var jsonData = JsonConvert.SerializeObject(entity);
+            var stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.PutAsync($"{endpoint}", stringContent);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Failed to update entity. Status code: {response.StatusCode}");
+            }
+
+            var updatedEntityJson = await response.Content.ReadAsStringAsync();
+            var updatedEntity = JsonConvert.DeserializeObject<TUpdateEntity>(updatedEntityJson);
+
+            return updatedEntity;
         }
     }
 }

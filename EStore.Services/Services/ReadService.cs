@@ -7,7 +7,6 @@ using EStore.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace EStore.Services
 {
@@ -34,15 +33,12 @@ namespace EStore.Services
             JObject jsonObject = JObject.Parse(jsonContent);
             JArray objectArray = (JArray)jsonObject[objectName];
             var result = objectArray.ToObject<List<TEntity>>();
-
-            //var result = JsonConvert.DeserializeObject<List<TEntity>>(jsonContent);
-
             return result;
         }
 
-        public async Task<TEntity> Get(string apiUrl)
+        public async Task<TEntity> Get(string apiUrl,string id)
         {
-            var response = await _httpClient.GetAsync(apiUrl);
+            var response = await _httpClient.GetAsync($"{apiUrl}{id}");
             response.EnsureSuccessStatusCode();
 
             var jsonContent = await response.Content.ReadAsStringAsync();

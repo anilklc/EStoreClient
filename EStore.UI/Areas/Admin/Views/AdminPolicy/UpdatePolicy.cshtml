@@ -1,16 +1,30 @@
-﻿@model CreatePolicy
+﻿@model ResultPolicy
 @{
-    ViewData["Title"] = "CreatePolicy";
+    ViewData["Title"] = "UpdatePolicy";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["ErrorMessage"]
+    </div>
 }
 <div class="container-fluid pt-4 px-4">
     <div class="row vh-100 bg-secondary rounded ">
         <div class="col-md-12">
             <div class="col-sm-12 col-xl-12">
                 <div class="bg-secondary rounded h-100 p-4">
-                    <h6 class="mb-4">Create Policy</h6>
+                    <h6 class="mb-4">Update Policy</h6>
                     <p class="card-subtitle mb-4">Please fill in the information about the vehicle completely.</p>
                     <form method="post">
+                        <input type="hidden" asp-for="Id" />
                         <div class="mb-3">
                             <label for="exampleInputPolicyName" class="form-label">Policy Name</label>
                             <input type="text" class="form-control" id="exampleInputPolicyName" asp-for="PolicyName" aria-describedby="policyName">
@@ -21,20 +35,18 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPolicyIcon" class="form-label">Policy Icon</label>
-                            <input type="text" class="form-control" id="exampleInputPolicyIcon" asp-for="PolicyIcon"  aria-describedby="policyIcon">
+                            <input type="text" class="form-control" id="exampleInputPolicyIcon" asp-for="PolicyIcon" aria-describedby="policyIcon">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPolicyTabHref" class="form-label">Policy Tab Href</label>
                             <input type="text" class="form-control" id="exampleInputPolicyTabHref" asp-for="PolicyTabHref" aria-describedby="policyTabHref">
                         </div>
-                      
-                        <button type="submit" class="btn btn-success">Create Policy</button>
+
+                        <button type="submit" class="btn btn-info">Update Policy</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 

@@ -1,56 +1,64 @@
 ﻿using EStore.Dto.Policies;
-using EStore.Services;
 using EStore.Services.Interfaces;
+using EStore.UI.Controllers;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Net.Http;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminPolicy")]
-    public class AdminPolicyController : Controller
+    public class AdminPolicyController : BaseController
     {
-       private readonly IWriteService<CreatePolicy> _writeService;
+        private readonly IWriteService<CreatePolicy, UpdatePolicy> _writeService;
         private readonly IReadService<ResultPolicy> _readService;
 
-        public AdminPolicyController(IWriteService<CreatePolicy> writeService, IReadService<ResultPolicy> readService)
+        public AdminPolicyController(IWriteService<CreatePolicy, UpdatePolicy> writeService, IReadService<ResultPolicy> readService)
+            : base()
         {
             _writeService = writeService;
             _readService = readService;
         }
 
-        [Route("Index")]
+        [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
             var policies = await _readService.GetAll("Policies/GetAllPolicies", "policies");
             return View(policies);
         }
 
-        //[HttpGet]
-        //[Route("[action]")]
-        //public IActionResult CreatePolicy()
-        //{
+        [HttpGet("[action]")]
+        public IActionResult CreatePolicy()
+        {
+            return View();
+        }
 
-        //    return View();
+        [HttpPost("[action]")]
+        public async Task<IActionResult> CreatePolicy(CreatePolicy createPolicy)
+        {
+            var result = await HandleServiceAction(async () => await _writeService.AddAsync(createPolicy, "Policies/CreatePolicy"), "Policy creation successful.", "Policy creation failed.");
+            return RedirectToAction(nameof(Index));
+        }
 
-        //}
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> RemovePolicy(string id)
+        {
+            var result = await HandleServiceAction(async () => await _writeService.DeleteAsync(id, "Policies/RemovePolicy/"), "Policy removal successful.", "Policy removal failed.");
+            return RedirectToAction(nameof(Index));
+        }
 
-        //[HttpPost]
-        //[Route("[action]")]
-        //public async Task<IActionResult> CreatePolicy(CreatePolicy createPolicy)
-        //{
-        //    try
-        //    {
-        //        var policy = await _writeService.AddAsync(createPolicy, "Policies/CreatePolicy");
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> UpdatePolicy(string id)
+        {
+            var policy = await _readService.Get("Policies/GetByIdPolicy/", id);
+            return View(policy);
+        }
 
-        //        return RedirectToAction("Index", "AdminPolicy", new { area = "Admin" });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return RedirectToAction("Error", "Home");
-        //    }
-        //}
+        [HttpPost("[action]/{id}")]
+        public async Task<IActionResult> UpdatePolicy(UpdatePolicy updatePolicy)
+        {
+            var result = await HandleServiceAction(async () => await _writeService.UpdateAsync(updatePolicy, "Policies/UpdatePolicy/"), "Policy update successful.", "Policy update failed.");
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

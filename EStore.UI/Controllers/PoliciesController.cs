@@ -18,7 +18,7 @@ namespace EStore.UI.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var policies = await _readService.GetAll("Brands/GetAllBrand","fjgrk");
+            var policies = await _readService.GetAll("Policies/GetAllPolicies", "policies");
             return View(policies);
         }
     }

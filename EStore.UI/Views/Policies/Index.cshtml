@@ -3,74 +3,27 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/UILayout/Index.cshtml";
 }
+
 <div class="my-account">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">
                 <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fab fa-cc-mastercard"></i>Payment Policy</a>
-                    <a class="nav-link" id="shipping-nav" data-toggle="pill" href="#shipping-tab" role="tab"><i class="fas fa-truck"></i>Shipping Policy</a>
-                    <a class="nav-link" id="return-nav" data-toggle="pill" href="#return-tab" role="tab"><i class="fa fa-sync-alt"></i>Return Policy</a>
-                    <a class="nav-link" id="privacy-nav" data-toggle="pill" href="#privacy-tab" role="tab"><i class="fa fa-user-secret"></i>Privacy Policy</a>
+                    @foreach (var item in Model)
+                    {
+                        <a class="nav-link @(item == Model.First() ? "active" : "")" id="@item.PolicyTabHref-nav" data-toggle="pill" href="#@item.PolicyTabHref-tab" role="tab"><i class="@item.PolicyIcon"></i>@item.PolicyName</a>
+                    }
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="tab-content">
-                    <div class="tab-pane fade show active" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
-                        <h2>Payment Policy</h2>
-                        <p>
-                            Welcome to EStore's Payment Policy! We strive to provide you with a seamless and secure payment experience.
-                            Our Payment Policy outlines the various payment options available to you and our commitment to ensuring the
-                            security of your transactions. We understand the importance of flexibility and offer multiple payment methods,
-                            including major credit/debit cards, digital wallets like PayPal, and bank transfers. Each transaction is processed
-                            securely through encrypted connections to protect your sensitive information. We do not store your payment details on
-                            our servers, ensuring the highest level of security. If you have any questions or concerns regarding payments, our dedicated
-                            customer support team is available to assist you.
-                        </p>
-                    </div>
-                    <div class="tab-pane fade" id="shipping-tab" role="tabpanel" aria-labelledby="shipping-nav">
-                        <h2>Shipping Policy</h2>
-                        <p>
-                            Explore EStore's Shipping Policy for a comprehensive understanding of our commitment to delivering your orders promptly
-                            and reliably. Our Shipping Policy outlines the various shipping options available to you, including standard and expedited
-                            shipping. We partner with trusted shipping carriers to ensure timely delivery of your orders. Shipping costs and delivery times
-                            may vary depending on factors such as your location, order size, and selected shipping method. Rest assured, you will receive a
-                            confirmation email with detailed tracking information upon placing your order. We are committed to transparent communication throughout
-                            the delivery process and promptly resolving any shipping-related issues.
-                        </p>
-                    </div>
-                    <div class="tab-pane fade" id="return-tab" role="tabpanel" aria-labelledby="return-nav">
-                        <h2>Return Policy</h2>
-                        <p>
-                            Dive into EStore's Return Policy to learn about our commitment to your satisfaction with every purchase. Our Return Policy outlines
-                            the guidelines for returning eligible items within a specified timeframe for a full refund or exchange. We understand that sometimes
-                            items may not meet your expectations, and we want to ensure a hassle-free return process for you. To facilitate a smooth return experience,
-                            please ensure that the item is returned in its original condition, including all tags and packaging. Return shipping costs are generally the
-                            responsibility of the customer unless the return is due to a defect or error on our part. Our goal is to provide you with a transparent and
-                            straightforward return process, allowing you to shop with confidence.
-                        </p>
-                    </div>
-                   @*  <div class="tab-pane fade" id="privacy-tab" role="tabpanel" aria-labelledby="privacy-nav">
-                        <h2>Privacy Policy</h2>
-                        <p>
-                            EStore's Privacy Policy underscores our commitment to protecting your privacy and personal information. Our Privacy Policy outlines the
-                            information we collect, how we use it, and our commitment to safeguarding your data. We collect only the necessary information required to
-                            process your orders and provide you with excellent service. This may include details such as your name, contact information, shipping address,
-                            and payment details. Rest assured that we do not share or sell your personal information to third parties for marketing purposes. We employ
-                            industry-standard security measures to safeguard your data against unauthorized access, alteration, or disclosure. By using our website and services,
-                            you implicitly agree to the terms outlined in our comprehensive Privacy Policy.
-                        </p>
-                    </div> *@
                     @foreach (var item in Model)
                     {
-                        <div class="tab-pane fade" id="privacy-tab" role="tabpanel" aria-labelledby="privacy-nav">
-                            <h2>@item.Id</h2>
-                            <p>
-                                @item.PolicyName
-                            </p>
+                        <div class="tab-pane fade @(item == Model.First() ? "show active" : "")" id="@item.PolicyTabHref-tab" role="tabpanel" aria-labelledby="@item.PolicyTabHref-nav">
+                            <h2>@item.PolicyName</h2>
+                            <p>@item.PolicyDescription</p>
                         </div>
                     }
-                    
                 </div>
             </div>
         </div>
