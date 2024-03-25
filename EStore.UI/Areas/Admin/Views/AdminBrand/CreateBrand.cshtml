@@ -1,0 +1,26 @@
+﻿@model CreateBrand
+@{
+    ViewData["Title"] = "CreateBrand";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row vh-100 bg-secondary rounded ">
+        <div class="col-md-12">
+            <div class="col-sm-12 col-xl-12">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Create Brand</h6>
+                    <p class="card-subtitle mb-4">Please fill in the information about the vehicle completely.</p>
+                    <form method="post">
+                        <div class="mb-3">
+                            <label for="exampleInputBrandName" class="form-label">Brand Name</label>
+                            <input type="text" class="form-control" id="exampleInputBrandName" asp-for="BrandName" aria-describedby="brandName">
+                        </div>
+                        <button type="submit" class="btn btn-success">Create Brand</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
