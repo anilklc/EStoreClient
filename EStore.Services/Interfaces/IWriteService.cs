@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +13,9 @@ namespace EStore.Services.Interfaces
         public Task<TCreateEntity> AddAsync(TCreateEntity entity, string endpoint);
         public Task DeleteAsync(string id, string endpoint);
         public Task<TUpdateEntity> UpdateAsync(TUpdateEntity entity, string endpoint);
-       
+        public  Task<TCreateEntity> UploadImageAsync(IFormFile formFile, string id, string endpoint);
+        public Task<TUpdateEntity> UpdateImageAsync(IFormFile formFile, string id, string endpoint);
+
+
     }
 }

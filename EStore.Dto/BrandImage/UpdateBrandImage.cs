@@ -10,6 +10,6 @@ namespace EStore.Dto.BrandImage
     public class UpdateBrandImage
     {
         public string Id { get; set; }
-        public IFormFile fromFile { get; set; }
+        public IFormFile formFile { get; set; }
     }
 }

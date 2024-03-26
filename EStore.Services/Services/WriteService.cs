@@ -1,4 +1,6 @@
 ﻿using EStore.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
@@ -6,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -66,6 +69,43 @@ namespace EStore.Services.Services
             var updatedEntity = JsonConvert.DeserializeObject<TUpdateEntity>(updatedEntityJson);
 
             return updatedEntity;
+        }
+        public async Task<TCreateEntity> UploadImageAsync(IFormFile formFile, string id, string endpoint)
+        {
+            using var formData = new MultipartFormDataContent();
+            formData.Add(new StreamContent(formFile.OpenReadStream()), "FormFile", formFile.FileName);
+
+            var response = await _httpClient.PostAsync($"{endpoint}{id}", formData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                var addedEntity = JsonConvert.DeserializeObject<TCreateEntity>(jsonResponse);
+                return addedEntity;
+            }
+            else
+            {
+                throw new HttpRequestException($"Resim yükleme başarısız oldu. Status code: {response.StatusCode}");
+            }
+        }
+
+        public async Task<TUpdateEntity> UpdateImageAsync(IFormFile formFile, string id, string endpoint)
+        {
+            using var formData = new MultipartFormDataContent();
+            formData.Add(new StreamContent(formFile.OpenReadStream()), "FormFile", formFile.FileName);
+
+            var response = await _httpClient.PutAsync($"{endpoint}{id}", formData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                var addedEntity = JsonConvert.DeserializeObject<TUpdateEntity>(jsonResponse);
+                return addedEntity;
+            }
+            else
+            {
+                throw new HttpRequestException($"Resim yükleme başarısız oldu. Status code: {response.StatusCode}");
+            }
         }
     }
 }
