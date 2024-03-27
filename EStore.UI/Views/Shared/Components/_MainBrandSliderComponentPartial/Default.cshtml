@@ -1,12 +1,11 @@
-﻿<div class="brand">
+﻿@model List<ResultBrandWithImages>
+<div class="brand">
     <div class="container-fluid">
         <div class="brand-slider">
-            <div class="brand-item"><img src="~/EStore/img/brand-1.png" alt=""></div>
-            <div class="brand-item"><img src="~/EStore/img/brand-2.png" alt=""></div>
-            <div class="brand-item"><img src="~/EStore/img/brand-3.png" alt=""></div>
-            <div class="brand-item"><img src="~/EStore/img/brand-4.png" alt=""></div>
-            <div class="brand-item"><img src="~/EStore/img/brand-5.png" alt=""></div>
-            <div class="brand-item"><img src="~/EStore/img/brand-6.png" alt=""></div>
+            @foreach (var item in Model)
+            {
+                <div class="brand-item"><img width="150" height="80" src="@item.ImagePath" alt=""></div>
+            }
         </div>
     </div>
 </div>
