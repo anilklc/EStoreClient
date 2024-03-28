@@ -14,7 +14,6 @@ namespace EStore.UI.Areas.Admin.Controllers
         private readonly IReadService<ResultPolicy> _readService;
 
         public AdminPolicyController(IWriteService<CreatePolicy, UpdatePolicy> writeService, IReadService<ResultPolicy> readService)
-            : base()
         {
             _writeService = writeService;
             _readService = readService;

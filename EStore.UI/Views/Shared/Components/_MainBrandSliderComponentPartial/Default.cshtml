@@ -4,7 +4,7 @@
         <div class="brand-slider">
             @foreach (var item in Model)
             {
-                <div class="brand-item"><img width="150" height="80" src="@item.ImagePath" alt=""></div>
+                <div class="brand-item"><img width="150" height="80" src="@item.ImagePath" alt="@item.BrandName"></div>
             }
         </div>
     </div>

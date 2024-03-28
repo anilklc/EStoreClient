@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<ResultAbout>
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/UILayout/Index.cshtml";
 }
@@ -7,24 +8,15 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 feature-col">
                 <div class="feature-content">
-                    <div class="policy-section">
-                        <i class="fas fa-info-circle fa-2x"></i>
-                        <h2>About Us</h2>
-                        <p>
-                            Welcome to EStore, your ultimate destination for online shopping! We are more than just an e-commerce platform; we are a community of individuals passionate about providing you with an exceptional shopping experience.
-                        </p>
-                        <p>
-                            At EStore, we are committed to offering a wide selection of high-quality products at competitive prices. From the latest trends to timeless classics, our diverse range of products caters to all your needs and preferences.
-                        </p>
-                        <p>
-                            Our mission is to exceed your expectations every step of the way. From seamless browsing to secure transactions and prompt delivery, we prioritize your satisfaction above all else. Our dedicated customer support team is available to assist you with any inquiries or concerns, ensuring that your shopping journey with us is hassle-free.
-                        </p>
-                        <p>
-                            Beyond delivering top-notch products and services, we are dedicated to sustainability and ethical business practices. We strive to minimize our environmental impact and support responsible sourcing and manufacturing processes.
-                        </p>
-                        <p>
-                            Thank you for choosing EStore as your preferred online shopping destination. Your trust and support mean the world to us, and we are committed to continually enhancing your shopping experience. Join us on this exciting journey, and let's make every purchase a delightful one together!
-                        </p>
+                    <div class="about-section">
+                        @foreach (var item in Model)
+                        {
+                            <i class="@item.AboutIcon"></i>
+                            <h2>@item.AboutTitle</h2>
+                            <p>
+                                @item.AboutDescription
+                            </p>
+                        }
                     </div>
                 </div>
             </div>
