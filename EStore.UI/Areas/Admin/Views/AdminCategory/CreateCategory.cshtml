@@ -1,0 +1,35 @@
+﻿@model CreateCategory
+@{
+    ViewData["Title"] = "CreateCategory";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row vh-100 bg-secondary rounded ">
+        <div class="col-md-12">
+            <div class="col-sm-12 col-xl-12">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Create Category</h6>
+                    <p class="card-subtitle mb-4">Please fill in the information category the vehicle completely.</p>
+                    <form method="post">
+                        <div class="mb-3">
+                            <label for="exampleInputCategoryName" class="form-label">Category Name</label>
+                            <input type="text" class="form-control" id="exampleInputCategoryName" asp-for="CategoryName" aria-describedby="CategoryName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputCategoryHrefUrl" class="form-label">Category Href Url</label>
+                            <input type="text" class="form-control" id="exampleInputCategoryHrefUrl" asp-for="CategoryHrefUrl" aria-describedby="CategoryHrefUrl">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputCategoryIcon" class="form-label">Category Icon</label>
+                            <input type="text" class="form-control" id="exampleInputCategoryIcon" asp-for="CategoryIcon" aria-describedby="CategoryIcon">
+                        </div>
+                        <button type="submit" class="btn btn-success">Create Category</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

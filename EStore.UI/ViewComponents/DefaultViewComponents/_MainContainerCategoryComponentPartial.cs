@@ -1,12 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EStore.Dto.Category;
+using EStore.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EStore.UI.ViewComponents.DefaultViewComponents
 {
     public class _MainContainerCategoryComponentPartial : ViewComponent
     {
-        public IViewComponentResult Invoke()
+        private readonly IReadService<ResultCategory> _readService;
+        public _MainContainerCategoryComponentPartial(IReadService<ResultCategory> readService)
         {
-            return View();
+            _readService = readService;
+        }
+        public async Task<IViewComponentResult> InvokeAsync()
+        {
+            var sldierImage = await _readService.GetAll("Categories/GetAllPopularCategory", "categories");
+            return View(sldierImage);
         }
     }
 }

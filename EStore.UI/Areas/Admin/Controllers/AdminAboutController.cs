@@ -1,5 +1,4 @@
 ﻿using EStore.Dto.About;
-using EStore.Dto.Policies;
 using EStore.Services.Interfaces;
 using EStore.UI.Controllers;
 using Microsoft.AspNetCore.Mvc;
