@@ -1,0 +1,30 @@
+﻿@model CreateReviewImage
+@{
+    ViewData["Title"] = "CreateReviewImage";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row vh-100 bg-secondary rounded ">
+        <div class="col-md-12">
+            <div class="col-sm-12 col-xl-12">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Create Slider Image</h6>
+                    <p class="card-subtitle mb-4">Please fill in the information about the review image completely.</p>
+                    <form asp-controller="AdminReviewImage" asp-action="CreateReviewImage" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="file">Select Image File:</label>
+                            <input type="file" name="FormFile" id="file" class="form-control bg-dark" />
+                        </div>
+                        <div class="mb-3">
+                            <input type="hidden" name="ReviewId" id="reviewId" value="@TempData["ReviewId"]" />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Upload Review Image</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

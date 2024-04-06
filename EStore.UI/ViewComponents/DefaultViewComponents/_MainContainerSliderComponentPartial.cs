@@ -1,12 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EStore.Dto.Slider;
+using EStore.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EStore.UI.ViewComponents.DefaultViewComponents
 {
     public class _MainContainerSliderComponentPartial : ViewComponent
     {
-        public IViewComponentResult Invoke()
+        private readonly IReadService<ResultSliderWithImages> _readService;
+        public _MainContainerSliderComponentPartial(IReadService<ResultSliderWithImages> readService)
         {
-            return View();
+            _readService = readService;
         }
+        public async Task<IViewComponentResult> InvokeAsync()
+        {
+            var sldierImage = await _readService.GetAll("SliderImages/GetAllActiveSliderWithSliderImage", "sliderWithSliderImages");
+            return View(sldierImage);
+        }
+
     }
 }

@@ -1,0 +1,34 @@
+﻿@model CreateReview
+@{
+    ViewData["Title"] = "CreateReview";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row vh-100 bg-secondary rounded ">
+        <div class="col-md-12">
+            <div class="col-sm-12 col-xl-12">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Create Review</h6>
+                    <p class="card-subtitle mb-4">Please fill in the information about the vehicle completely.</p>
+                    <form method="post">
+                        <div class="mb-3">
+                            <label for="exampleInputReviewerName" class="form-label">Reviewer Name</label>
+                            <input type="text" class="form-control" id="exampleInputReviewerName" asp-for="ReviewerName" aria-describedby="reviewerName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputReviewTitle" class="form-label">Review Title</label>
+                            <input type="text" class="form-control" id="exampleInputReviewTitle" asp-for="ReviewTitle" aria-describedby="reviewTitle">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputReviewComment" class="form-label">Review Comment</label>
+                            <input type="text" class="form-control" id="exampleInputReviewComment" asp-for="ReviewComment" aria-describedby="reviewComment">
+                        </div>
+                        <button type="submit" class="btn btn-success">Create Review</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,25 +1,15 @@
-﻿<div class="col-md-6">
+﻿@model List<ResultSliderWithImages>
+<div class="col-md-6">
     <div class="header-slider normal-slider">
-        <div class="header-slider-item">
-            <img src="~/EStore/img/slider-1.jpg" alt="Slider Image" />
-            <div class="header-slider-caption">
-                <p>Some text goes here that describes the image</p>
-                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
+        @foreach (var item in Model)
+        {
+            <div class="header-slider-item">
+                <img src="@item.ImagePath" alt="@item.SliderSubtitle" width="685" height="400"/>
+                <div class="header-slider-caption">
+                    <p>@item.SliderTitle</p>
+                    <a class="btn" href="@item.SliderTargetUrl"><i class="fa fa-shopping-cart"></i>Shop Now</a>
+                </div>
             </div>
-        </div>
-        <div class="header-slider-item">
-            <img src="~/EStore/img/slider-2.jpg" alt="Slider Image" />
-            <div class="header-slider-caption">
-                <p>Some text goes here that describes the image</p>
-                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
-            </div>
-        </div>
-        <div class="header-slider-item">
-            <img src="~/EStore/img/slider-3.jpg" alt="Slider Image" />
-            <div class="header-slider-caption">
-                <p>Some text goes here that describes the image</p>
-                <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
-            </div>
-        </div>
+        }
     </div>
 </div>
