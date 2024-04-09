@@ -1,4 +1,5 @@
-﻿  <!-- Footer Start -->
+﻿@model List<ResultFooter>  
+<!-- Footer Start -->
 <div class="footer">
     <div class="container-fluid">
         <div class="row">
@@ -6,27 +7,18 @@
                 <div class="footer-widget">
                     <h2>Get in Touch</h2>
                     <div class="contact-info">
-                        <p><i class="fa fa-map-marker"></i>123 E Store, Los Angeles, USA</p>
-                        <p><i class="fa fa-envelope"></i>email@example.com</p>
-                        <p><i class="fa fa-phone"></i>+123-456-7890</p>
+                        @foreach (var item in Model)
+                        {
+                            <p><i class="fa fa-map-marker"></i>@item.FooterAddress</p>
+                            <p><i class="fa fa-envelope"></i>@item.FooterEmail</p>
+                            <p><i class="fa fa-phone"></i>@item.FooterPhone</p>
+                        }
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6">
-                <div class="footer-widget">
-                    <h2>Follow Us</h2>
-                    <div class="contact-info">
-                        <div class="social">
-                            <a href=""><i class="fab fa-twitter"></i></a>
-                            <a href=""><i class="fab fa-facebook-f"></i></a>
-                            <a href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a href=""><i class="fab fa-instagram"></i></a>
-                            <a href=""><i class="fab fa-youtube"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @await Component.InvokeAsync("_FooterSocialMediaComponentPartial")
+            
 
             <div class="col-lg-3 col-md-6">
                 <div class="footer-widget">
@@ -75,7 +67,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 copyright">
-                <p>Copyright &copy; <a href="#">Your Site Name</a>. All Rights Reserved</p>
+                <p>Copyright &copy; <a href="#">EStore</a>. All Rights Reserved</p>
             </div>
 
             <div class="col-md-6 template-by">

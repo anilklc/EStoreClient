@@ -1,0 +1,35 @@
+﻿@model ResultFooter
+@{
+    ViewData["Title"] = "UpdateFooter";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row vh-100 bg-secondary rounded ">
+        <div class="col-md-12">
+            <div class="col-sm-12 col-xl-12">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Create Footer</h6>
+                    <p class="card-subtitle mb-4">Please fill in the information footer the vehicle completely.</p>
+                    <form method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="mb-3">
+                            <label for="exampleInputFooterAddress" class="form-label">Footer Address</label>
+                            <input type="text" class="form-control" id="exampleInputFooterAddress" asp-for="FooterAddress" aria-describedby="FooterAddress">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputFooterPhone" class="form-label">Footer Phone</label>
+                            <input type="tel" class="form-control" id="exampleInputFooterPhone" asp-for="FooterPhone" aria-describedby="FooterPhone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputFooterEmail" class="form-label">Footer Email</label>
+                            <input type="text" class="form-control" id="exampleInputFooterEmail" asp-for="FooterEmail" aria-describedby="FooterEmail">
+                        </div>
+                        <button type="submit" class="btn btn-success">Create Footer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

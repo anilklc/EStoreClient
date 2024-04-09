@@ -1,14 +1,16 @@
-﻿  <!-- Top bar Start -->
+﻿@model List<ResultAnnouncement>
+<!-- Top bar Start -->
 <div class="top-bar">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6">
-                <i class="fa fa-envelope"></i>
-                support@email.com
-            </div>
-            <div class="col-sm-6">
-                <i class="fa fa-phone-alt"></i>
-                +012-345-6789
+            <div class="announcement-container">
+                @foreach (var announcement in Model)
+                {
+                    <div class="announcement" >
+
+                        <i class="fa fa-bullhorn"></i>@announcement.Title
+                    </div>
+                }
             </div>
         </div>
     </div>
@@ -49,3 +51,20 @@
     </div>
 </div>
 <!-- Nav Bar End --> 
+<!--Script for Announcement Start -->
+<script>
+    var announcements = document.querySelectorAll('.announcement');
+    var index = 0;
+    for (var i = 1; i < announcements.length; i++) {
+        announcements[i].style.display = 'none';
+    }
+    setInterval(function () {
+        announcements[index].style.display = 'none';
+        index++;
+        if (index >= announcements.length) {
+            index = 0;
+        }
+        announcements[index].style.display = 'block';
+    }, 5000);
+</script>
+<!--Script for Announcement End -->
