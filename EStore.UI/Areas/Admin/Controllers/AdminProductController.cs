@@ -1,8 +1,11 @@
-﻿using EStore.Dto.Product;
+﻿using EStore.Dto.BrandImage;
+using EStore.Dto.Product;
 using EStore.Dto.Product;
 using EStore.Services.Interfaces;
 using EStore.UI.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json.Linq;
 
 namespace EStore.UI.Areas.Admin.Controllers
 {
@@ -10,10 +13,10 @@ namespace EStore.UI.Areas.Admin.Controllers
     [Route("Admin/AdminProduct")]
     public class AdminProductController : BaseController
     {
-        private readonly IWriteService<CreateProduct, UpdateProduct> _writeService;
+        private readonly IWriteService<CreateProduct, object> _writeService;
         private readonly IReadService<ResultProductAdmin> _readService;
 
-        public AdminProductController(IWriteService<CreateProduct, UpdateProduct> writeService, IReadService<ResultProductAdmin> readService)
+        public AdminProductController(IWriteService<CreateProduct, object> writeService, IReadService<ResultProductAdmin> readService)
         {
             _writeService = writeService;
             _readService = readService;
@@ -22,13 +25,29 @@ namespace EStore.UI.Areas.Admin.Controllers
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
-            var Products = await _readService.GetAll("Products/GetAllProductsAdmin", "products");
-            return View(Products);
+            var products = await _readService.GetAll("Products/GetAllProductsAdmin", "products");
+            return View(products);
         }
 
         [HttpGet("[action]")]
-        public IActionResult CreateProduct()
+        public async Task<IActionResult> CreateProduct()
         {
+            var brand = await _readService.GetAll("Brands/GetAllBrands", "brands");
+            List<SelectListItem> brandValues = (from x in brand
+                                               select new SelectListItem
+                                               {
+                                                   Text = x.BrandName,
+                                                   Value = x.Id.ToString()
+                                               }).ToList();
+            ViewBag.brandValues = brandValues;
+            var category = await _readService.GetAll("Categories/GetAllCategories", "categories");
+            List<SelectListItem> categoryValues = (from x in category
+                                                   select new SelectListItem
+                                               {
+                                                   Text = x.CategoryName,
+                                                   Value = x.Id.ToString()
+                                               }).ToList();
+            ViewBag.categoryValues = categoryValues;
             return View();
         }
 
@@ -50,8 +69,24 @@ namespace EStore.UI.Areas.Admin.Controllers
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> UpdateProduct(string id)
         {
-            var Product = await _readService.Get("Products/GetByIdProduct/", id);
-            return View(Product);
+            var brand = await _readService.GetAll("Brands/GetAllBrands", "brands");
+            List<SelectListItem> brandValues = (from x in brand
+                                                select new SelectListItem
+                                                {
+                                                    Text = x.BrandName,
+                                                    Value = x.Id.ToString()
+                                                }).ToList();
+            ViewBag.brandValues = brandValues;
+            var category = await _readService.GetAll("Categories/GetAllCategories", "categories");
+            List<SelectListItem> categoryValues = (from x in category
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = x.CategoryName,
+                                                       Value = x.Id.ToString()
+                                                   }).ToList();
+            ViewBag.categoryValues = categoryValues;
+            var product = await _readService.Get("Products/GetByIdProduct/", id);
+            return View(product);
         }
 
         [HttpPost("[action]/{id}")]
@@ -60,5 +95,19 @@ namespace EStore.UI.Areas.Admin.Controllers
             var result = await HandleServiceAction(async () => await _writeService.UpdateAsync(updateProduct, "Products/UpdateProduct/"), "Product update successful.", "Product update failed.");
             return RedirectToAction(nameof(Index));
         }
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> UpdateProductCoverImage(string id)
+        {
+            var product = await _readService.Get("Products/GetByIdProduct/", id);
+            return View(product);
+        }
+
+        [HttpPost("[action]/{id}")]
+        public async Task<IActionResult> UpdateProductCoverImage(UpdateProductCoverImage updateProductCoverImage)
+        {
+            var result = await HandleServiceAction(async () => await _writeService.UpdateImageAsync(updateProductCoverImage.formFile, updateProductCoverImage.Id,"Products/UpdateCoverProductImage?id="), "Product update successful.", "Product update failed.");
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

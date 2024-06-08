@@ -14,7 +14,8 @@
                     <form method="post">
                         <div class="mb-3">
                             <label for="exampleInputBrandName" class="form-label">Brand Name</label>
-                            <input type="text" class="form-control" id="exampleInputBrandName" asp-for="BrandName" aria-describedby="brandName">
+                            @Html.DropDownListFor(x => x.BrandName, (List<SelectListItem>)ViewBag.RoleValues, new { @class = "form-control" })
+                          
                         </div>
                         <button type="submit" class="btn btn-success">Create Brand</button>
                     </form>

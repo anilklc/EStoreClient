@@ -1,0 +1,27 @@
+﻿@model ResultProductAdmin
+@{
+    ViewData["Title"] = "UpdateProductCoverImage";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row vh-100 bg-secondary rounded ">
+        <div class="col-md-12">
+            <div class="col-sm-12 col-xl-12">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Update Cover Image Product</h6>
+                    <p class="card-subtitle mb-4">Please fill in the information about the vehicle completely.</p>
+                    <form method="post" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="mb-3">
+                            <label for="file">Select Image File:</label>
+                            <input type="file" name="FormFile" id="file" class="form-control bg-dark" />
+                        </div>
+                        
+                        <button type="submit" class="btn btn-success">Update Cover Image Product</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+

@@ -1,0 +1,46 @@
+﻿@model CreateProduct
+@{
+    ViewData["Title"] = "CreateProduct";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row vh-100 bg-secondary rounded ">
+        <div class="col-md-12">
+            <div class="col-sm-12 col-xl-12">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Create Product</h6>
+                    <p class="card-subtitle mb-4">Please fill in the information about the vehicle completely.</p>
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="exampleInputProductName" class="form-label">Product Name</label>
+                            <input type="text" class="form-control" id="exampleInputProductName" asp-for="ProductName" aria-describedby="ProductName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputProductDescription" class="form-label">Product Description</label>
+                            <input type="text" class="form-control" id="exampleInputProductDescription" asp-for="ProductDescription" aria-describedby="ProductDescription">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPrice" class="form-label">Product Price</label>
+                            <input type="text" class="form-control" id="exampleInputPrice" asp-for="Price" aria-describedby="Price">
+                        </div>
+                        <div class="mb-3">
+                            <label for="file">Select Image File:</label>
+                            <input type="file" name="FormFile" id="file" class="form-control bg-dark" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputBrandName" class="form-label">Brand Name</label>
+                            @Html.DropDownListFor(x => x.BrandId, (List<SelectListItem>)ViewBag.BrandValues, new { @class = "form-control" })
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputCategoryName" class="form-label">Category Name</label>
+                            @Html.DropDownListFor(x => x.CategoryId, (List<SelectListItem>)ViewBag.CategoryValues, new { @class = "form-control" })
+                        </div>
+                        <button type="submit" class="btn btn-success">Create Product</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

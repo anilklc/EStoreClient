@@ -29,18 +29,29 @@ namespace EStore.Services.Services
         }
         public async Task<TCreateEntity> AddAsync(TCreateEntity entity, string endpoint)
         {
-
-            var jsonContent = JsonConvert.SerializeObject(entity);
-            var response = await _httpClient.PostAsync(endpoint, new StringContent(jsonContent, Encoding.UTF8, "application/json"));
-
+            using var formData = new MultipartFormDataContent();
+            foreach (var prop in typeof(TCreateEntity).GetProperties())
+            {
+                var value = prop.GetValue(entity);
+                if (value != null)
+                {
+                    if (value is IFormFile file)
+                    {
+                        formData.Add(new StreamContent(file.OpenReadStream()), prop.Name, file.FileName);
+                    }
+                    else
+                    {
+                        formData.Add(new StringContent(value.ToString()), prop.Name);
+                    }
+                }
+            }
+            var response = await _httpClient.PostAsync(endpoint, formData);
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Failed to add entity. Status code: {response.StatusCode}");
             }
-
             var jsonResponse = await response.Content.ReadAsStringAsync();
             var addedEntity = JsonConvert.DeserializeObject<TCreateEntity>(jsonResponse);
-
             return addedEntity;
         }
 
