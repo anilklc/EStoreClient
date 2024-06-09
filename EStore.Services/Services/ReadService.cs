@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using EStore.Dto.Product;
 using EStore.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -36,6 +37,18 @@ namespace EStore.Services
             return result;
         }
 
+        public async Task<TEntity> GetAllPagination(string apiUrl)
+        {
+           
+            var response = await _httpClient.GetAsync(apiUrl);
+            response.EnsureSuccessStatusCode();
+
+            var jsonContent = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<TEntity>(jsonContent);
+
+            return result;
+        }
+
         public async Task<TEntity> Get(string apiUrl,string id)
         {
             var response = await _httpClient.GetAsync($"{apiUrl}{id}");
@@ -46,5 +59,7 @@ namespace EStore.Services
 
             return result;
         }
+
+      
     }
 }

@@ -9,11 +9,9 @@ namespace EStore.Dto.Product
 {
     public class ResultProduct
     {
-        public Guid Id { get; set; }
-        public string ProductName { get; set; }
-        public string ProductDescription { get; set; }
-        public string ProductCoverImagePath { get; set; }
-        public float Price { get; set; }
-        
+        public List<ProductDto> Products { get; set; }
+        public int CurrentPage { get; set; }
+        public int TotalPages { get; set; }
+
     }
 }

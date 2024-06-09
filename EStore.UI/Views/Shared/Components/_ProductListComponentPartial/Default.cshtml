@@ -1,4 +1,5 @@
-﻿<div class="col-lg-8">
+﻿@model ResultProduct
+<div class="col-lg-8">
     <div class="row">
         <div class="col-md-12">
             <div class="product-view-top">
@@ -37,276 +38,54 @@
                 </div>
             </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="product-item">
-                <div class="product-title">
-                    <a href="#">Product Name</a>
-                    <div class="ratting">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
+        @foreach (var item in Model.Products)
+        {
+            <div class="col-md-4">
+                <div class="product-item">
+                    <div class="product-title">
+                        <a href="#">@item.ProductName</a>
                     </div>
-                </div>
-                <div class="product-image">
-                    <a href="product-detail.html">
-                        <img src="~/EStore/img/product-1.jpg" alt="Product Image">
-                    </a>
-                    <div class="product-action">
-                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                        <a href="#"><i class="fa fa-search"></i></a>
+                    <div class="product-image">
+                        <a href="product-detail.html">
+                            <img src="@item.CoverImagePath" alt="Product Image">
+                        </a>
+                        <div class="product-action">
+                            <a href="#"><i class="fa fa-cart-plus"></i></a>
+                            <a href="#"><i class="fa fa-search"></i></a>
+                        </div>
                     </div>
-                </div>
-                <div class="product-price">
-                    <h3><span>$</span>99</h3>
-                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                    <div class="product-price">
+                        <h3><span>$</span>@item.Price</h3>
+                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="product-item">
-                <div class="product-title">
-                    <a href="#">Product Name</a>
-                    <div class="ratting">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </div>
-                <div class="product-image">
-                    <a href="product-detail.html">
-                        <img src="~/EStore/img/product-2.jpg" alt="Product Image">
-                    </a>
-                    <div class="product-action">
-                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                        <a href="#"><i class="fa fa-search"></i></a>
-                    </div>
-                </div>
-                <div class="product-price">
-                    <h3><span>$</span>99</h3>
-                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="product-item">
-                <div class="product-title">
-                    <a href="#">Product Name</a>
-                    <div class="ratting">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </div>
-                <div class="product-image">
-                    <a href="product-detail.html">
-                        <img src="~/EStore/img/product-3.jpg" alt="Product Image">
-                    </a>
-                    <div class="product-action">
-                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                        <a href="#"><i class="fa fa-search"></i></a>
-                    </div>
-                </div>
-                <div class="product-price">
-                    <h3><span>$</span>99</h3>
-                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="product-item">
-                <div class="product-title">
-                    <a href="#">Product Name</a>
-                    <div class="ratting">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </div>
-                <div class="product-image">
-                    <a href="product-detail.html">
-                        <img src="~/EStore/img/product-4.jpg" alt="Product Image">
-                    </a>
-                    <div class="product-action">
-                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                        <a href="#"><i class="fa fa-search"></i></a>
-                    </div>
-                </div>
-                <div class="product-price">
-                    <h3><span>$</span>99</h3>
-                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="product-item">
-                <div class="product-title">
-                    <a href="#">Product Name</a>
-                    <div class="ratting">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </div>
-                <div class="product-image">
-                    <a href="product-detail.html">
-                        <img src="~/EStore/img/product-5.jpg" alt="Product Image">
-                    </a>
-                    <div class="product-action">
-                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                        <a href="#"><i class="fa fa-search"></i></a>
-                    </div>
-                </div>
-                <div class="product-price">
-                    <h3><span>$</span>99</h3>
-                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="product-item">
-                <div class="product-title">
-                    <a href="#">Product Name</a>
-                    <div class="ratting">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </div>
-                <div class="product-image">
-                    <a href="product-detail.html">
-                        <img src="~/EStore/img/product-6.jpg" alt="Product Image">
-                    </a>
-                    <div class="product-action">
-                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                        <a href="#"><i class="fa fa-search"></i></a>
-                    </div>
-                </div>
-                <div class="product-price">
-                    <h3><span>$</span>99</h3>
-                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="product-item">
-                <div class="product-title">
-                    <a href="#">Product Name</a>
-                    <div class="ratting">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </div>
-                <div class="product-image">
-                    <a href="product-detail.html">
-                        <img src="~/EStore/img/product-7.jpg" alt="Product Image">
-                    </a>
-                    <div class="product-action">
-                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                        <a href="#"><i class="fa fa-search"></i></a>
-                    </div>
-                </div>
-                <div class="product-price">
-                    <h3><span>$</span>99</h3>
-                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="product-item">
-                <div class="product-title">
-                    <a href="#">Product Name</a>
-                    <div class="ratting">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </div>
-                <div class="product-image">
-                    <a href="product-detail.html">
-                        <img src="~/EStore/img/product-8.jpg" alt="Product Image">
-                    </a>
-                    <div class="product-action">
-                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                        <a href="#"><i class="fa fa-search"></i></a>
-                    </div>
-                </div>
-                <div class="product-price">
-                    <h3><span>$</span>99</h3>
-                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="product-item">
-                <div class="product-title">
-                    <a href="#">Product Name</a>
-                    <div class="ratting">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </div>
-                <div class="product-image">
-                    <a href="product-detail.html">
-                        <img src="~/EStore/img/product-9.jpg" alt="Product Image">
-                    </a>
-                    <div class="product-action">
-                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                        <a href="#"><i class="fa fa-search"></i></a>
-                    </div>
-                </div>
-                <div class="product-price">
-                    <h3><span>$</span>99</h3>
-                    <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 
     <!-- Pagination Start -->
     <div class="col-md-12">
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                <li class="page-item @(Model.CurrentPage == 0 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = Model.CurrentPage > 0 ? Model.CurrentPage - 1 : 0 })" tabindex="-1">Previous</a>
                 </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
+
+                @for (int i = 0; i < Model.TotalPages; i++)
+                {
+                    int pageNumber = i + 1;
+                    <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { page = i })">@pageNumber</a>
+                    </li>
+                }
+
+                <li class="page-item @(Model.CurrentPage == Model.TotalPages-1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = Model.CurrentPage < Model.TotalPages ? Model.CurrentPage + 1 : Model.TotalPages })">Next</a>
                 </li>
             </ul>
         </nav>
     </div>
-    <!-- Pagination Start -->
+
+
+    <!-- Pagination End -->
 </div>
