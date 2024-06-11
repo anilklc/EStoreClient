@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+<!-- Breadcrumb Start -->
+<div class="breadcrumb-wrap">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/Default/Index/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/Products/Index/">Products</a></li>
+            <li class="breadcrumb-item active">Product Detail</li>
+        </ul>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Product Detail Start -->
+<div class="product-detail">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+
+                @await Component.InvokeAsync("_ProductDetailComponentPartial" , new {Id = ViewBag.Id} )
+     
+                @await Component.InvokeAsync("_RelatedProductComponentPartial")
+
+
+            </div>
+
+            <!-- Side Bar Start -->
+            <div class="col-lg-4 sidebar">
+
+                @await Component.InvokeAsync("_ProductCategoryComponentPartial")
+
+                @await Component.InvokeAsync("_ProductWidgetBrandsComponentPartial")
+
+            </div>            <!-- Side Bar End -->
+        </div>
+    </div>
+</div>
+<!-- Product Detail End -->
+<!-- Brand Start -->
+@await Component.InvokeAsync("_MainBrandSliderComponentPartial")
+<!-- Brand End -->
