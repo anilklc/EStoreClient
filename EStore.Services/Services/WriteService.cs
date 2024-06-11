@@ -27,7 +27,7 @@ namespace EStore.Services.Services
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
-        public async Task<TCreateEntity> AddAsync(TCreateEntity entity, string endpoint)
+        public async Task<TCreateEntity> AddWithFileAsync(TCreateEntity entity, string endpoint)
         {
             using var formData = new MultipartFormDataContent();
             foreach (var prop in typeof(TCreateEntity).GetProperties())
@@ -54,7 +54,22 @@ namespace EStore.Services.Services
             var addedEntity = JsonConvert.DeserializeObject<TCreateEntity>(jsonResponse);
             return addedEntity;
         }
+        public async Task<TCreateEntity> AddAsync(TCreateEntity entity, string endpoint)
+        {
 
+            var jsonContent = JsonConvert.SerializeObject(entity);
+            var response = await _httpClient.PostAsync(endpoint, new StringContent(jsonContent, Encoding.UTF8, "application/json"));
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Failed to add entity. Status code: {response.StatusCode}");
+            }
+
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            var addedEntity = JsonConvert.DeserializeObject<TCreateEntity>(jsonResponse);
+
+            return addedEntity;
+        }
         public async Task DeleteAsync(string id, string endpoint)
         {
             var response = await _httpClient.DeleteAsync($"{endpoint}{id}");

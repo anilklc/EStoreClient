@@ -1,0 +1,31 @@
+﻿@model ResultStock
+@{
+    ViewData["Title"] = "UpdateProductStock";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row vh-100 bg-secondary rounded ">
+        <div class="col-md-12">
+            <div class="col-sm-12 col-xl-12">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Create Policy</h6>
+                    <p class="card-subtitle mb-4">Please fill in the information about the vehicle completely.</p>
+                    <form method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="mb-3">
+                            <label for="exampleInputProductSize" class="form-label">ProductSize</label>
+                            <input type="text" class="form-control" id="exampleInputProductSize" asp-for="ProductSize" aria-describedby="ProductSize">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputProductStock" class="form-label">Product Stock</label>
+                            <input type="number" class="form-control" id="exampleInputProductStock" asp-for="ProductStock" aria-describedby="ProductStock">
+                        </div>
+                        <button type="submit" class="btn btn-success">Update Product Stock</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

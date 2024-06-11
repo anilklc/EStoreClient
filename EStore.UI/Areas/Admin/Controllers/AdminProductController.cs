@@ -54,7 +54,7 @@ namespace EStore.UI.Areas.Admin.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateProduct(CreateProduct createProduct)
         {
-            var result = await HandleServiceAction(async () => await _writeService.AddAsync(createProduct, "Products/CreateProduct"), "Product creation successful.", "Product creation failed.");
+            var result = await HandleServiceAction(async () => await _writeService.AddWithFileAsync(createProduct, "Products/CreateProduct"), "Product creation successful.", "Product creation failed.");
             return RedirectToAction(nameof(Index));
         }
 
