@@ -1,12 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EStore.Dto.Brand;
+using EStore.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EStore.UI.ViewComponents.ProductViewComponents
 {
     public class _ProductWidgetBrandsComponentPartial : ViewComponent
     {
-        public IViewComponentResult Invoke()
+        private readonly IReadService<ResultBrand> _readService;
+        public _ProductWidgetBrandsComponentPartial(IReadService<ResultBrand> readService)
         {
-            return View();
+            _readService = readService;
+        }
+        public async Task<IViewComponentResult> InvokeAsync()
+        {
+            var brandImage = await _readService.GetAll("Brands/GetAllBrands", "brands");
+            return View(brandImage);
         }
     }
 }
