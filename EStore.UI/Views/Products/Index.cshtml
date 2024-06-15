@@ -7,7 +7,7 @@
 <div class="product-view">
     <div class="container-fluid">
         <div class="row">
-            @await Component.InvokeAsync("_ProductListComponentPartial",new {page =ViewBag.Page})
+            @await Component.InvokeAsync("_ProductListComponentPartial", new { page = ViewBag.Page, brandName = ViewBag.BrandName, categoryName = ViewBag.CategoryName, maxPrice = ViewBag.MaxPrice, minPrice = ViewBag.MinPrice })
 
             <!-- Side Bar Start -->
             <div class="col-lg-4 sidebar">

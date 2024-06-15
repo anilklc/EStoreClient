@@ -5,7 +5,7 @@
             @foreach (var item in Model)
             {
                 <li class="nav-item">
-                    <a class="nav-link" href="@item.CategoryHrefUrl"><i class="@item.CategoryIcon"></i>@item.CategoryName</a>
+                    <a class="nav-link" href="/Products?categoryName=@item.CategoryName"><i class="@item.CategoryIcon"></i>@item.CategoryName</a>
                 </li>
             }
         </ul>

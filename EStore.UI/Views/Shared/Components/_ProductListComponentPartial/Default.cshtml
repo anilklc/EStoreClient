@@ -21,16 +21,11 @@
                             <div class="dropdown">
                                 <div class="dropdown-toggle" data-toggle="dropdown">Product price range</div>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="#" class="dropdown-item">$0 to $50</a>
-                                    <a href="#" class="dropdown-item">$51 to $100</a>
-                                    <a href="#" class="dropdown-item">$101 to $150</a>
-                                    <a href="#" class="dropdown-item">$151 to $200</a>
-                                    <a href="#" class="dropdown-item">$201 to $250</a>
-                                    <a href="#" class="dropdown-item">$251 to $300</a>
-                                    <a href="#" class="dropdown-item">$301 to $350</a>
-                                    <a href="#" class="dropdown-item">$351 to $400</a>
-                                    <a href="#" class="dropdown-item">$401 to $450</a>
-                                    <a href="#" class="dropdown-item">$451 to $500</a>
+                                    <a href="@Url.Action("Index", new { minPrice = 0 ,maxPrice = 30 })" class="dropdown-item">$0 to $30</a>
+                                    <a href="@Url.Action("Index", new { minPrice = 30 ,maxPrice = 50})" class="dropdown-item">$30 to $50</a>
+                                    <a href="@Url.Action("Index", new { minPrice = 50 ,maxPrice = 70})" class="dropdown-item">$50 to $70</a>
+                                    <a href="@Url.Action("Index", new { minPrice = 70 ,maxPrice = 90})" class="dropdown-item">$70 to $90</a>
+                                    <a href="@Url.Action("Index", new { minPrice = 90 ,maxPrice = 150})" class="dropdown-item">$90 to $150</a>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +63,7 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <li class="page-item @(Model.CurrentPage == 0 ? "disabled" : "")">
-                    <a class="page-link" href="@Url.Action("Index", new { page = Model.CurrentPage > 0 ? Model.CurrentPage - 1 : 0 })" tabindex="-1">Previous</a>
+                    <a class="page-link" href="@Url.Action("Index", new { page = Model.CurrentPage > 0 ? Model.CurrentPage - 1 : 0})" tabindex="-1">Previous</a>
                 </li>
 
                 @for (int i = 0; i < Model.TotalPages; i++)

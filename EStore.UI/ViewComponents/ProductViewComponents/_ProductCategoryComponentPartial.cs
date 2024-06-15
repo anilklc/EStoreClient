@@ -13,8 +13,8 @@ namespace EStore.UI.ViewComponents.ProductViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var sldierImage = await _readService.GetAll("Categories/GetAllCategories", "categories");
-            return View(sldierImage);
+            var categories = await _readService.GetAll("Categories/GetAllCategories", "categories");
+            return View(categories);
         }
     }
 }
