@@ -1,5 +1,4 @@
 ﻿@model List<EStore.Dto.Product.ResultProductDetail>
-
 @foreach (var product in Model)
 {
     <div class="product-detail-top">
@@ -29,7 +28,7 @@
                         <h4>Quantity:</h4>
                         <div class="qty">
                             <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                            <input type="text" value="1">
+                            <input type="text" value="1" min="1" class="quantity-input" id="quantityInput-@product.Id">
                             <button class="btn-plus"><i class="fa fa-plus"></i></button>
                         </div>
                     </div>
@@ -38,13 +37,13 @@
                         <div class="btn-group btn-group-sm">
                             @foreach (var stock in product.Stock)
                             {
-                                <button type="button" class="btn">@stock.ProductSize</button>
+                                <button type="button" class="btn" data-product-id="@product.Id" data-product-size="@stock.ProductSize">@stock.ProductSize</button>
                             }
                         </div>
                     </div>
                     <div class="action">
-                        <a class="btn" href="#"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
-                        <a class="btn" href="#"><i class="fa fa-shopping-bag"></i>Buy Now</a>
+                        <a class="btn add-to-cart" data-id="@product.Id" data-name="@product.ProductName" data-price="@product.Price" href="#"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                        <a class="btn buy-now" data-id="@product.Id" data-name="@product.ProductName" data-price="@product.Price" href="#"><i class="fa fa-shopping-bag"></i>Buy Now</a>
                     </div>
                 </div>
             </div>
@@ -67,3 +66,53 @@
         </div>
     </div>
 }
+<script>
+
+    
+    function addToCart(productId, productName, productPrice, quantity, size) {
+        console.log(`Adding ${quantity} ${size} of ${productName} (ID: ${productId}) to cart with price $${productPrice} each.`);
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let existingProduct = cart.find(item => item.id === productId && item.size === size);
+
+        if (existingProduct) {
+            existingProduct.quantity += quantity;
+        } else {
+            cart.push({ id: productId, name: productName, price: productPrice, quantity: quantity, size: size });
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert('Product added to cart!');
+    }
+
+
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            const productId = this.dataset.id;
+            const productName = this.dataset.name;
+            const productPrice = parseFloat(this.dataset.price);
+            const quantity = parseInt(document.getElementById(`quantityInput-${productId}`).value);
+            const sizeButtons = document.querySelectorAll(`.btn-group-sm button[data-product-id="${productId}"]`);
+            let selectedSize = '';
+            sizeButtons.forEach(btn => {
+                if (btn.classList.contains('active')) {
+                    selectedSize = btn.dataset.productSize;
+                }
+            });
+            addToCart(productId, productName, productPrice, quantity, selectedSize);
+        });
+    });
+
+
+    const sizeButtons = document.querySelectorAll('.btn-group-sm button');
+    sizeButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const productId = this.dataset.productId;
+            sizeButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            this.classList.add('active');
+        });
+    });
+</script>

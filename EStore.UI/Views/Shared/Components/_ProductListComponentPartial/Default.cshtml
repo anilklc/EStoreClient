@@ -1,4 +1,5 @@
-﻿@model ResultProduct
+﻿@model EStore.Dto.Product.ResultProduct
+
 <div class="col-lg-8">
     <div class="row">
         <div class="col-md-12">
@@ -7,7 +8,7 @@
                     <div class="col-md-4">
                         <div class="product-short">
                             <div class="dropdown">
-                                <div class="dropdown-toggle" data-toggle="dropdown">Product short by</div>
+                                <div class="dropdown-toggle" data-toggle="dropdown">Product sort by</div>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="#" class="dropdown-item">Newest</a>
                                     <a href="#" class="dropdown-item">Popular</a>
@@ -21,11 +22,11 @@
                             <div class="dropdown">
                                 <div class="dropdown-toggle" data-toggle="dropdown">Product price range</div>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="@Url.Action("Index", new { minPrice = 0 ,maxPrice = 30 })" class="dropdown-item">$0 to $30</a>
-                                    <a href="@Url.Action("Index", new { minPrice = 30 ,maxPrice = 50})" class="dropdown-item">$30 to $50</a>
-                                    <a href="@Url.Action("Index", new { minPrice = 50 ,maxPrice = 70})" class="dropdown-item">$50 to $70</a>
-                                    <a href="@Url.Action("Index", new { minPrice = 70 ,maxPrice = 90})" class="dropdown-item">$70 to $90</a>
-                                    <a href="@Url.Action("Index", new { minPrice = 90 ,maxPrice = 150})" class="dropdown-item">$90 to $150</a>
+                                    <a href="@Url.Action("Index", new { minPrice = 0, maxPrice = 30 })" class="dropdown-item">$0 to $30</a>
+                                    <a href="@Url.Action("Index", new { minPrice = 30, maxPrice = 50 })" class="dropdown-item">$30 to $50</a>
+                                    <a href="@Url.Action("Index", new { minPrice = 50, maxPrice = 70 })" class="dropdown-item">$50 to $70</a>
+                                    <a href="@Url.Action("Index", new { minPrice = 70, maxPrice = 90 })" class="dropdown-item">$70 to $90</a>
+                                    <a href="@Url.Action("Index", new { minPrice = 90, maxPrice = 150 })" class="dropdown-item">$90 to $150</a>
                                 </div>
                             </div>
                         </div>
@@ -33,6 +34,7 @@
                 </div>
             </div>
         </div>
+
         @foreach (var item in Model.Products)
         {
             <div class="col-md-4">
@@ -41,17 +43,17 @@
                         <a href="/ProductDetail/Index/@item.Id/">@item.ProductName</a>
                     </div>
                     <div class="product-image">
-                        <a href="product-detail.html">
+                        <a href="/ProductDetail/Index/@item.Id/">
                             <img src="@item.CoverImagePath" alt="Product Image">
                         </a>
                         <div class="product-action">
-                            <a href="#"><i class="fa fa-cart-plus"></i></a>
-                            <a href="#"><i class="fa fa-search"></i></a>
+                            <a class="btn buy-now"><i class="fa fa-cart-plus"></i></a>
+                            <a href="/ProductDetail/Index/@item.Id/"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="product-price">
                         <h3><span>$</span>@item.Price</h3>
-                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                        <a class="btn buy-now" data-id="@item.Id" data-name="@item.ProductName" data-price="@item.Price" href="#"><i class="fa fa-shopping-cart"></i>Buy Now</a>
                     </div>
                 </div>
             </div>
@@ -74,13 +76,42 @@
                     </li>
                 }
 
-                <li class="page-item @(Model.CurrentPage == Model.TotalPages-1 ? "disabled" : "")">
+                <li class="page-item @(Model.CurrentPage == Model.TotalPages - 1 ? "disabled" : "")">
                     <a class="page-link" href="@Url.Action("Index", new { page = Model.CurrentPage < Model.TotalPages ? Model.CurrentPage + 1 : Model.TotalPages })">Next</a>
                 </li>
             </ul>
         </nav>
     </div>
-
-
     <!-- Pagination End -->
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const buyNowButtons = document.querySelectorAll('.buy-now');
+
+        buyNowButtons.forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                const productId = this.dataset.id;
+                const productName = this.dataset.name;
+                const productPrice = parseFloat(this.dataset.price);
+                addToCart(productId, productName, productPrice);
+                window.location.href = '/Cart/Index';
+            });
+        });
+
+        function addToCart(id, name, price) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            let existingProduct = cart.find(product => product.id === id);
+            if (existingProduct) {
+                existingProduct.quantity++;
+            } else {
+                cart.push({ id, name, price, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Product added to cart!');
+        }
+    });
+</script>
