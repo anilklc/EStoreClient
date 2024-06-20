@@ -1,4 +1,5 @@
 ﻿@model List<EStore.Dto.Product.ResultProductDetail>
+
 @foreach (var product in Model)
 {
     <div class="product-detail-top">
@@ -19,8 +20,8 @@
             </div>
             <div class="col-md-7">
                 <div class="product-content">
-                    <div class="title"><h2>@product.ProductName</h2></div>
-                    <div class="price">
+                    <div class="title" id="productName_@product.Id"><h2>@product.ProductName</h2></div>
+                    <div class="price" id="productPrice_@product.Id">
                         <h4>Price:</h4>
                         <p>$@product.Price</p>
                     </div>
@@ -28,7 +29,7 @@
                         <h4>Quantity:</h4>
                         <div class="qty">
                             <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                            <input type="text" value="1" min="1" class="quantity-input" id="quantityInput-@product.Id">
+                            <input type="text" value="1" min="1" class="quantity-input" id="quantityInput_@product.Id">
                             <button class="btn-plus"><i class="fa fa-plus"></i></button>
                         </div>
                     </div>
@@ -37,7 +38,7 @@
                         <div class="btn-group btn-group-sm">
                             @foreach (var stock in product.Stock)
                             {
-                                <button type="button" class="btn" data-product-id="@product.Id" data-product-size="@stock.ProductSize">@stock.ProductSize</button>
+                                <button type="button" class="btn product-size-btn" data-product-id="@product.Id" data-product-size="@stock.ProductSize" data-stock-id="@stock.Id" data-product-stock="@stock.ProductStock">@stock.ProductSize</button>
                             }
                         </div>
                     </div>
@@ -53,12 +54,12 @@
         <div class="col-lg-12">
             <ul class="nav nav-pills nav-justified">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="pill" href="#description">Description</a>
+                    <a class="nav-link active" data-toggle="pill" href="#description_@product.Id">Description</a>
                 </li>
             </ul>
 
             <div class="tab-content">
-                <div id="description" class="container tab-pane active">
+                <div id="description_@product.Id" class="container tab-pane active">
                     <h4>Product description</h4>
                     <p>@product.ProductDescription</p>
                 </div>
@@ -67,52 +68,69 @@
     </div>
 }
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
 
-    
-    function addToCart(productId, productName, productPrice, quantity, size) {
-        console.log(`Adding ${quantity} ${size} of ${productName} (ID: ${productId}) to cart with price $${productPrice} each.`);
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let existingProduct = cart.find(item => item.id === productId && item.size === size);
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
 
+                const productId = this.dataset.id;
+                const productName = this.dataset.name;
+                const productPrice = parseFloat(this.dataset.price);
+                const quantity = parseInt(document.getElementById('quantityInput_' + productId).value);
+                const sizeButtons = document.querySelectorAll('.product-size-btn[data-product-id="' + productId + '"]');
+                let selectedSize = '';
+                let selectedStock = 0;
+                let selectedStockId = '';
+
+
+                sizeButtons.forEach(btn => {
+                    if (btn.classList.contains('active')) {
+                        selectedSize = btn.dataset.productSize;
+                        selectedStock = btn.dataset.productStock;
+                        selectedStockId = btn.dataset.stockId;
+                    }
+                });
+
+                if (selectedSize === '') {
+                    alert('Please select a size!');
+                    return;
+                }
+
+                addToCart(productId, productName, productPrice, quantity, selectedSize, selectedStock, selectedStockId);
+            });
+        });
+
+        // Size düğmelerine tıklama olayını dinleyelim
+        document.querySelectorAll('.product-size-btn').forEach(sizeButton => {
+            sizeButton.addEventListener('click', function () {
+                // Aktif seçimi kaldır ve tıklanan düğmeye aktif sınıf ekle
+                document.querySelectorAll('.product-size-btn[data-product-id="' + this.dataset.productId + '"]').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+    });
+
+    function addToCart(productId, productName, productPrice, quantity, size, stock, stockId) {
+        console.log(`Adding ${quantity} ${size} of ${productName} (ID: ${productId}, Stock ID: ${stockId}) to cart with price $${productPrice} each.`);
+
+        // Local Storage'da ürün ve stok bilgilerini sakla
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+        // Sepette aynı ürün ve beden var mı kontrol et
+        let existingProduct = cartItems.find(item => item.productId === productId && item.size === size);
         if (existingProduct) {
             existingProduct.quantity += quantity;
         } else {
-            cart.push({ id: productId, name: productName, price: productPrice, quantity: quantity, size: size });
+            cartItems.push({ productId, productName, productPrice, quantity, size, stock, stockId });
         }
 
-        localStorage.setItem('cart', JSON.stringify(cart));
+        // Local Storage'a kaydet
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
         alert('Product added to cart!');
     }
-
-
-    const addToCartButtons = document.querySelectorAll('.add-to-cart');
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', function (event) {
-            event.preventDefault();
-            const productId = this.dataset.id;
-            const productName = this.dataset.name;
-            const productPrice = parseFloat(this.dataset.price);
-            const quantity = parseInt(document.getElementById(`quantityInput-${productId}`).value);
-            const sizeButtons = document.querySelectorAll(`.btn-group-sm button[data-product-id="${productId}"]`);
-            let selectedSize = '';
-            sizeButtons.forEach(btn => {
-                if (btn.classList.contains('active')) {
-                    selectedSize = btn.dataset.productSize;
-                }
-            });
-            addToCart(productId, productName, productPrice, quantity, selectedSize);
-        });
-    });
-
-
-    const sizeButtons = document.querySelectorAll('.btn-group-sm button');
-    sizeButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const productId = this.dataset.productId;
-            sizeButtons.forEach(btn => {
-                btn.classList.remove('active');
-            });
-            this.classList.add('active');
-        });
-    });
 </script>
