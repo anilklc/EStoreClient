@@ -1,6 +1,7 @@
 ﻿using EStore.Dto.Product;
 using EStore.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Web;
 
 namespace EStore.UI.ViewComponents.ProductDetailViewComponents
@@ -14,10 +15,10 @@ namespace EStore.UI.ViewComponents.ProductDetailViewComponents
             _readService = readService;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string categoryId)
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            
-            var productList = await _readService.GetAll($"Products/GetProductByCategoryId/{categoryId}", "getProductByCategories");
+
+            var productList = await _readService.GetAllPagination($"Products/GetAllProductsByFilter");
             return View(productList);
         }
     }

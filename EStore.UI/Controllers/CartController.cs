@@ -24,13 +24,4 @@ namespace EStore.UI.Controllers
             return Ok(new { success = true });
         }
     }
-
-    public class CartItem
-    {
-        public string ProductId { get; set; }
-        public string ProductName { get; set; }
-        public decimal ProductPrice { get; set; }
-        public int Quantity { get; set; }
-        public string Size { get; set; }
-    }
 }
