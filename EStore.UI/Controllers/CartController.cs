@@ -7,26 +7,30 @@ namespace EStore.UI.Controllers
     {
         public IActionResult Index()
         {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Checkout()
+        {
 
             return View();
         }
 
         [HttpPost]
-        public IActionResult Checkout([FromBody] List<CartItem> cart)
+        public IActionResult ClearCart()
         {
-            // Sipariş işleme kodu buraya gelecek
-            // Örneğin: sipariş veritabanına kaydedilecek
-
-            // İşlemin başarılı olduğunu varsayıyoruz
-            return Json(new { success = true });
+            
+            return Ok(new { success = true });
         }
     }
 
     public class CartItem
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public decimal Price { get; set; }
+        public string ProductId { get; set; }
+        public string ProductName { get; set; }
+        public decimal ProductPrice { get; set; }
         public int Quantity { get; set; }
+        public string Size { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace EStore.Dto.Product
     {
         public string Id { get; set; }
         public string ProductName { get; set; }
+        public string ProductCoverImage { get; set; }
         public string ProductDescription { get; set; }
         public float Price { get; set; }
         public List<ProductImageDto> ProductImages { get; set; }

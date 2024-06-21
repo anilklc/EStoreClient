@@ -43,8 +43,8 @@
                         </div>
                     </div>
                     <div class="action">
-                        <a class="btn add-to-cart" data-id="@product.Id" data-name="@product.ProductName" data-price="@product.Price" href="#"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
-                        <a class="btn buy-now" data-id="@product.Id" data-name="@product.ProductName" data-price="@product.Price" href="#"><i class="fa fa-shopping-bag"></i>Buy Now</a>
+                        <a class="btn add-to-cart" data-id="@product.Id" data-name="@product.ProductName" data-price="@product.Price" data-cover-image="@product.ProductCoverImage" href="#"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                        <a class="btn buy-now" data-id="@product.Id" data-name="@product.ProductName" data-price="@product.Price" data-cover-image="@product.ProductCoverImage" href="#"><i class="fa fa-shopping-bag"></i>Buy Now</a>
                     </div>
                 </div>
             </div>
@@ -67,70 +67,5 @@
         </div>
     </div>
 }
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+<script src="~/EStore/js/cart/cart2.js"></script>
 
-        addToCartButtons.forEach(button => {
-            button.addEventListener('click', function (event) {
-                event.preventDefault();
-
-                const productId = this.dataset.id;
-                const productName = this.dataset.name;
-                const productPrice = parseFloat(this.dataset.price);
-                const quantity = parseInt(document.getElementById('quantityInput_' + productId).value);
-                const sizeButtons = document.querySelectorAll('.product-size-btn[data-product-id="' + productId + '"]');
-                let selectedSize = '';
-                let selectedStock = 0;
-                let selectedStockId = '';
-
-
-                sizeButtons.forEach(btn => {
-                    if (btn.classList.contains('active')) {
-                        selectedSize = btn.dataset.productSize;
-                        selectedStock = btn.dataset.productStock;
-                        selectedStockId = btn.dataset.stockId;
-                    }
-                });
-
-                if (selectedSize === '') {
-                    alert('Please select a size!');
-                    return;
-                }
-
-                addToCart(productId, productName, productPrice, quantity, selectedSize, selectedStock, selectedStockId);
-            });
-        });
-
-        // Size düğmelerine tıklama olayını dinleyelim
-        document.querySelectorAll('.product-size-btn').forEach(sizeButton => {
-            sizeButton.addEventListener('click', function () {
-                // Aktif seçimi kaldır ve tıklanan düğmeye aktif sınıf ekle
-                document.querySelectorAll('.product-size-btn[data-product-id="' + this.dataset.productId + '"]').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                this.classList.add('active');
-            });
-        });
-    });
-
-    function addToCart(productId, productName, productPrice, quantity, size, stock, stockId) {
-        console.log(`Adding ${quantity} ${size} of ${productName} (ID: ${productId}, Stock ID: ${stockId}) to cart with price $${productPrice} each.`);
-
-        // Local Storage'da ürün ve stok bilgilerini sakla
-        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-
-        // Sepette aynı ürün ve beden var mı kontrol et
-        let existingProduct = cartItems.find(item => item.productId === productId && item.size === size);
-        if (existingProduct) {
-            existingProduct.quantity += quantity;
-        } else {
-            cartItems.push({ productId, productName, productPrice, quantity, size, stock, stockId });
-        }
-
-        // Local Storage'a kaydet
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
-
-        alert('Product added to cart!');
-    }
-</script>

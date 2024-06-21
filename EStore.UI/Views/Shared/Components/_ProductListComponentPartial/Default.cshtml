@@ -6,18 +6,6 @@
             <div class="product-view-top">
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="product-short">
-                            <div class="dropdown">
-                                <div class="dropdown-toggle" data-toggle="dropdown">Product sort by</div>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="#" class="dropdown-item">Newest</a>
-                                    <a href="#" class="dropdown-item">Popular</a>
-                                    <a href="#" class="dropdown-item">Most sale</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
                         <div class="product-price-range">
                             <div class="dropdown">
                                 <div class="dropdown-toggle" data-toggle="dropdown">Product price range</div>
@@ -47,13 +35,12 @@
                             <img src="@item.CoverImagePath" alt="Product Image">
                         </a>
                         <div class="product-action">
-                            <a class="btn buy-now"><i class="fa fa-cart-plus"></i></a>
                             <a href="/ProductDetail/Index/@item.Id/"><i class="fa fa-search"></i></a>
                         </div>
                     </div>
                     <div class="product-price">
                         <h3><span>$</span>@item.Price</h3>
-                        <a class="btn buy-now" data-id="@item.Id" data-name="@item.ProductName" data-price="@item.Price" href="#"><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                        <a class="btn go-detail" href="/ProductDetail/Index/@item.Id/"><i class="fa fa-search"></i> Go Detail</a>
                     </div>
                 </div>
             </div>
@@ -84,34 +71,3 @@
     </div>
     <!-- Pagination End -->
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const buyNowButtons = document.querySelectorAll('.buy-now');
-
-        buyNowButtons.forEach(button => {
-            button.addEventListener('click', function (event) {
-                event.preventDefault();
-                const productId = this.dataset.id;
-                const productName = this.dataset.name;
-                const productPrice = parseFloat(this.dataset.price);
-                addToCart(productId, productName, productPrice);
-                window.location.href = '/Cart/Index';
-            });
-        });
-
-        function addToCart(id, name, price) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-            let existingProduct = cart.find(product => product.id === id);
-            if (existingProduct) {
-                existingProduct.quantity++;
-            } else {
-                cart.push({ id, name, price, quantity: 1 });
-            }
-
-            localStorage.setItem('cart', JSON.stringify(cart));
-            alert('Product added to cart!');
-        }
-    });
-</script>
