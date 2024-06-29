@@ -18,8 +18,10 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped(typeof(IReadService<>), typeof(ReadService<>));
 builder.Services.AddScoped(typeof(IWriteService<,>), typeof(WriteService<,>));
+builder.Services.AddScoped(typeof(ILoginService<>), typeof(LoginService<>));
 
 var app = builder.Build();
 

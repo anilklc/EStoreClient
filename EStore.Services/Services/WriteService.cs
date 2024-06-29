@@ -27,6 +27,7 @@ namespace EStore.Services.Services
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
+
         public async Task<TCreateEntity> AddWithFileAsync(TCreateEntity entity, string endpoint)
         {
             using var formData = new MultipartFormDataContent();
@@ -56,7 +57,7 @@ namespace EStore.Services.Services
         }
         public async Task<TCreateEntity> AddAsync(TCreateEntity entity, string endpoint)
         {
-
+          
             var jsonContent = JsonConvert.SerializeObject(entity);
             var response = await _httpClient.PostAsync(endpoint, new StringContent(jsonContent, Encoding.UTF8, "application/json"));
 
@@ -72,6 +73,7 @@ namespace EStore.Services.Services
         }
         public async Task DeleteAsync(string id, string endpoint)
         {
+
             var response = await _httpClient.DeleteAsync($"{endpoint}{id}");
             if (!response.IsSuccessStatusCode)
             {
@@ -82,6 +84,7 @@ namespace EStore.Services.Services
 
         public async Task<TUpdateEntity> UpdateAsync(TUpdateEntity entity, string endpoint)
         {
+
             var jsonData = JsonConvert.SerializeObject(entity);
             var stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
