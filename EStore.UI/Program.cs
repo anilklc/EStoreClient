@@ -1,24 +1,34 @@
-using EStore.Dto.Policies;
 using EStore.Services;
 using EStore.Services.Interfaces;
 using EStore.Services.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllersWithViews();
+
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); 
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.Name = "AccessToken";
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SameSite = SameSiteMode.Strict;
+        options.LoginPath = "/Admin/AdminLogin/Index";
+    });
+
 builder.Services.AddHttpClient();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped(typeof(IReadService<>), typeof(ReadService<>));
@@ -39,6 +49,9 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseSession();
 
+app.UseMiddleware<TokenMiddleware>();
+
+app.UseAuthentication(); 
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -48,8 +61,8 @@ app.MapControllerRoute(
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
-      name: "areas",
-      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+        name: "areas",
+        pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
     );
 });
 

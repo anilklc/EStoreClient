@@ -8,6 +8,8 @@ namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminCategory")]
+    [Authorize(Roles = "Admin,Editor")]
+
     public class AdminCategoryController : BaseController
     {
         private readonly IWriteService<CreateCategory, UpdateCategory> _writeService;

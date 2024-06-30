@@ -39,7 +39,7 @@ namespace EStore.UI.Areas.Admin.Controllers
                 var cookieOptions = new CookieOptions
                 {
                     HttpOnly = true,
-                    Secure = true,
+                    Secure = false,
                     Expires = loginResponse.Token.Expiration
                 };
 
