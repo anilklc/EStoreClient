@@ -18,14 +18,18 @@ namespace EStore.Services.Services
     {
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public WriteService(HttpClient httpClient, IConfiguration configuration)
+        public WriteService(HttpClient httpClient, IConfiguration configuration, IHttpContextAccessor contextAccessor)
         {
             _configuration = configuration;
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
             _httpClient.BaseAddress = new Uri(_configuration["ApiSettings:BaseUrl"]);
             _httpClient.DefaultRequestHeaders.Accept.Clear();
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _httpContextAccessor = contextAccessor;
+            var accessToken = _httpContextAccessor.HttpContext.Request.Cookies["AccessToken"];
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
         }
 
         public async Task<TCreateEntity> AddWithFileAsync(TCreateEntity entity, string endpoint)
@@ -57,10 +61,9 @@ namespace EStore.Services.Services
         }
         public async Task<TCreateEntity> AddAsync(TCreateEntity entity, string endpoint)
         {
-          
             var jsonContent = JsonConvert.SerializeObject(entity);
             var response = await _httpClient.PostAsync(endpoint, new StringContent(jsonContent, Encoding.UTF8, "application/json"));
-
+            
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException($"Failed to add entity. Status code: {response.StatusCode}");

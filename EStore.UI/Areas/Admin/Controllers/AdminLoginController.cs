@@ -33,8 +33,8 @@ namespace EStore.UI.Areas.Admin.Controllers
                 return View(loginRequest);
             }
 
-            var loginResponse = await _loginService.Login("Auth/Login", loginRequest);
-            if (loginResponse != null)
+            var loginResponse = await _loginService.Login("Auth/LoginAdmin", loginRequest);
+            if (loginResponse != null & loginResponse.Token !=null)
             {
                 var cookieOptions = new CookieOptions
                 {
