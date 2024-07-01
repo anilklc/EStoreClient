@@ -21,5 +21,19 @@ namespace EStore.Services.Services
 
             return new string[0];
         }
+
+        public static string GetUserNameFromToken(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
+
+            if (jsonToken != null)
+            {
+                return jsonToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+            }
+
+            return null;
+        }
+
     }
 }

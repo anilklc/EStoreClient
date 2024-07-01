@@ -18,13 +18,14 @@
                 <div class="user">
                     <a href="/Cart/Index/" class="btn wishlist">
                         <i class="fa fa-shopping-cart"></i>
-                        <span>(0)</span>
                     </a>
-                    <a href="/Account/Index/" class="btn account">
-                        <i class="fa fa-user"></i>
-                        <span>My Account</span>
-                    </a>
-                    
+                    @if (ViewBag.IsUserLoggedIn)
+                    {
+                        <a href="/Account/Index/" class="btn account">
+                            <i class="fa fa-user"></i>
+                            <span>My Account (@ViewBag.UserName)</span>
+                        </a>  
+                    }
                 </div>
             </div>
         </div>

@@ -34,7 +34,7 @@ namespace EStore.UI.Areas.Admin.Controllers
             }
 
             var loginResponse = await _loginService.Login("Auth/LoginAdmin", loginRequest);
-            if (loginResponse != null & loginResponse.Token !=null)
+            if (loginResponse != null && loginResponse.Token !=null)
             {
                 var cookieOptions = new CookieOptions
                 {

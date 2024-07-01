@@ -36,7 +36,10 @@ namespace EStore.Services.Services
         public async Task<TEntity> Login(string apiUrl,object loginRequest)
         {
             var response = await _httpClient.PostAsJsonAsync(apiUrl, loginRequest);
-            response.EnsureSuccessStatusCode();
+            if (!response.IsSuccessStatusCode)
+            {
+                return default;
+            }
             return await response.Content.ReadFromJsonAsync<TEntity>();
         }
     }

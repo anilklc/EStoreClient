@@ -14,12 +14,12 @@ public class TokenMiddleware
 
     public async Task Invoke(HttpContext context)
     {
-        var token = context.Request.Cookies["AccessToken"]; // Cookie'den token'ı al
+        var token = context.Request.Cookies["AccessToken"];
 
         if (!string.IsNullOrEmpty(token))
         {
-            var roles = TokenService.GetRolesFromToken(token); // Token'den rolleri çöz
-
+            var roles = TokenService.GetRolesFromToken(token);
+            
             var claims = new List<Claim>();
             foreach (var role in roles)
             {
@@ -28,6 +28,12 @@ public class TokenMiddleware
 
             var identity = new ClaimsIdentity(claims, "cookie");
             context.User = new ClaimsPrincipal(identity);
+
+            var username = TokenService.GetUserNameFromToken(token);
+            if (!string.IsNullOrEmpty(username))
+            {
+                identity.AddClaim(new Claim(ClaimTypes.Name, username));
+            }
         }
 
         await _next(context);

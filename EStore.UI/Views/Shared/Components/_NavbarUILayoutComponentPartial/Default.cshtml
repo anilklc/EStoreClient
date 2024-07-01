@@ -1,4 +1,5 @@
 ﻿@model List<ResultAnnouncement>
+
 <!-- Top bar Start -->
 <div class="top-bar">
     <div class="container-fluid">
@@ -6,8 +7,7 @@
             <div class="announcement-container">
                 @foreach (var announcement in Model)
                 {
-                    <div class="announcement" >
-
+                    <div class="announcement">
                         <i class="fa fa-bullhorn"></i>@announcement.Title
                     </div>
                 }
@@ -35,22 +35,29 @@
                     <a href="/Policies/Index/" class="nav-item nav-link">Policies</a>
                     <a href="/About/Index/" class="nav-item nav-link">About</a>
                     <a href="/Contact/Index/" class="nav-item nav-link">Contact</a>
-                   
                 </div>
                 <div class="navbar-nav ml-auto">
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Login or Register</a>
-                        <div class="dropdown-menu">
-                            <a href="/Login/Index/" class="dropdown-item">Login</a>
-                            <a href="/Register/Index/" class="dropdown-item">Register</a>
+                    @if (!ViewBag.IsUserLoggedIn)
+                    {
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Login or Register</a>
+                            <div class="dropdown-menu">
+                                <a href="/Login/Index/" class="dropdown-item">Login</a>
+                                <a href="/Register/Index/" class="dropdown-item">Register</a>
+                            </div>
                         </div>
-                    </div>
+                    }
+                    else
+                    {
+                    <a href="/Account/Logout" class="nav-item nav-link">Logout</a>
+
+                    }
                 </div>
             </div>
         </nav>
     </div>
 </div>
-<!-- Nav Bar End --> 
+<!-- Nav Bar End -->
 <!--Script for Announcement Start -->
 <script>
     var announcements = document.querySelectorAll('.announcement');

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EStore.Services.Helper;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EStore.UI.ViewComponents.UILayoutViewComponents
 {
@@ -6,6 +7,8 @@ namespace EStore.UI.ViewComponents.UILayoutViewComponents
     {
         public IViewComponentResult Invoke()
         {
+            ViewBag.IsUserLoggedIn = UserHelper.IsUserLoggedIn(HttpContext);
+            ViewBag.UserName = UserHelper.GetUserName(HttpContext);
             return View();
         }
     }
