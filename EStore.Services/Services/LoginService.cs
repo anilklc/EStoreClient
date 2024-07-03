@@ -17,6 +17,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Net.Http;
+using Newtonsoft.Json;
+using System.Net;
 
 namespace EStore.Services.Services
 {
@@ -41,6 +43,17 @@ namespace EStore.Services.Services
                 return default;
             }
             return await response.Content.ReadFromJsonAsync<TEntity>();
+        }
+
+        public async Task<bool> Logout(string apiUrl,Logout logout)
+        {
+            var jsonContent = JsonConvert.SerializeObject(logout);
+            var response = await _httpClient.PostAsync(apiUrl, new StringContent(jsonContent, Encoding.UTF8, "application/json"));
+            if (!response.IsSuccessStatusCode)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
