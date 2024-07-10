@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+
+<div class="my-account">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link" id="dashboard-nav" href="/Account/UserDashboard/Index" role="tab"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
+                    <a class="nav-link" id="orders-nav" href="/Account/UserOrder/Index" role="tab"><i class="fa fa-shopping-bag"></i>Orders</a>
+                    <a class="nav-link" id="address-nav" href="/Account/UserAddress/Index" role="tab"><i class="fa fa-map-marker-alt"></i>Address</a>
+                    <a class="nav-link active" id="account-nav" href="/Account/UserAccountDetail/Index" role="tab"><i class="fa fa-user"></i>Account Details</a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="tab-content">
+                    <div class="tab-pane fade active show" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
+                        <h4>Account Details</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" placeholder="First Name">
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" placeholder="Last Name">
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" placeholder="Mobile">
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" placeholder="Email">
+                            </div>
+                            <div class="col-md-12">
+                                <input class="form-control" type="text" placeholder="Address">
+                            </div>
+                            <div class="col-md-12">
+                                <button class="btn">Update Account</button>
+                                <br><br>
+                            </div>
+                        </div>
+                        <h4>Password change</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input class="form-control" type="password" placeholder="Current Password">
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" placeholder="New Password">
+                            </div>
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" placeholder="Confirm Password">
+                            </div>
+                            <div class="col-md-12">
+                                <button class="btn">Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -17,7 +17,11 @@ namespace EStore.UI.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            if (UserHelper.GetUserName(HttpContext)!=null)
+              return RedirectToAction("Index", "UserDashboard", new { area = "Account" });
+
+            return RedirectToAction("Index", "Default");
+
         }
 
 
