@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<ResultAddress>
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/UILayout/Index.cshtml";
 }
@@ -11,7 +12,7 @@
                 <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
                     <a class="nav-link" id="dashboard-nav" href="/Account/UserDashboard/Index" role="tab"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
                     <a class="nav-link" id="orders-nav" href="/Account/UserOrder/Index" role="tab"><i class="fa fa-shopping-bag"></i>Orders</a>
-                    <a class="nav-link active" id="address-nav" data-toggle="pill" href="#address-tab" role="tab" aria-controls="address-tab" aria-selected="true"><i class="fa fa-map-marker-alt"></i>Address</a>
+                    <a class="nav-link active" id="address-nav" data-toggle="pill" href="/Account/UserAddress/Index" role="tab" aria-controls="address-tab" aria-selected="true"><i class="fa fa-map-marker-alt"></i>Address</a>
                     <a class="nav-link" id="account-nav" href="/Account/UserAccountDetail/Index" role="tab"><i class="fa fa-user"></i>Account Details</a>
                 </div>
             </div>
@@ -22,100 +23,35 @@
                             <table class="table table-bordered">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th>No</th>
-                                        <th>Product</th>
-                                        <th>Date</th>
-                                        <th>Price</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Address Title</th>
+                                        <th>Address Detail</th>
+                                        <th>Address City/District</th>
+                                        <th>Update</th>
+                                        <th>Remove</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Product Name 1</td>
-                                        <td>01 Jan 2020</td>
-                                        <td>$99</td>
-                                        <td>Approved</td>
-                                        <td><button class="btn">View</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Product Name 2</td>
-                                        <td>01 Jan 2020</td>
-                                        <td>$99</td>
-                                        <td>Approved</td>
-                                        <td><button class="btn">View</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Product Name 3</td>
-                                        <td>01 Jan 2020</td>
-                                        <td>$99</td>
-                                        <td>Approved</td>
-                                        <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Ekle</button></td>
-                                    </tr>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.AddressTitle</td>
+                                            <td>@item.Detail</td>
+                                            <td>@item.City/@item.District</td>
+                                            <td><a class="btn" href="/Account/UserAddress/UpdateAddress/@item.Id">Update</a></td>
+                                            <td><a class="btn" href="/Account/UserAddress/RemoveAddress/@item.Id">Remove</a></td>
+                                        </tr>
+                                    }
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
+                    <br />
+                    <center><a type="button" class="btn btn-primary" href="/Account/UserAddress/CreateAddress">Ekle</a></center>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- My Account End -->
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Yeni Kayıt Ekle</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Form -->
-                <form id="createForm">
-                    <div class="mb-3">
-                        <label for="firstName" class="form-label">Ad</label>
-                        <input type="text" class="form-control" id="firstName" name="FirstName">
-                    </div>
-                    <div class="mb-3">
-                        <label for="lastName" class="form-label">Soyad</label>
-                        <input type="text" class="form-control" id="lastName" name="LastName">
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Telefon</label>
-                        <input type="text" class="form-control" id="phone" name="Phone">
-                    </div>
-                    <div class="mb-3">
-                        <label for="addressTitle" class="form-label">Adres Başlığı</label>
-                        <input type="text" class="form-control" id="addressTitle" name="AddressTitle">
-                    </div>
-                    <div class="mb-3">
-                        <label for="country" class="form-label">Ülke</label>
-                        <input type="text" class="form-control" id="country" name="Country">
-                    </div>
-                    <div class="mb-3">
-                        <label for="city" class="form-label">İl</label>
-                        <input type="text" class="form-control" id="city" name="City">
-                    </div>
-                    <div class="mb-3">
-                        <label for="district" class="form-label">İlçe</label>
-                        <input type="text" class="form-control" id="district" name="District">
-                    </div>
-                    <div class="mb-3">
-                        <label for="detail" class="form-label">Detay</label>
-                        <input type="text" class="form-control" id="detail" name="Detail">
-                    </div>
-                    <!-- Diğer form alanları buraya eklenebilir -->
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-                <button type="button" class="btn btn-primary" id="saveButton">Kaydet</button>
-            </div>
-        </div>
-    </div>
-</div>
+

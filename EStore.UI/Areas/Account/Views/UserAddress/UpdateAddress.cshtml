@@ -1,0 +1,69 @@
+﻿@model ResultAddress
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+
+<div class="my-account">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link" id="dashboard-nav" href="/Account/UserDashboard/Index" role="tab"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
+                    <a class="nav-link" id="orders-nav" href="/Account/UserOrder/Index" role="tab"><i class="fa fa-shopping-bag"></i>Orders</a>
+                    <a class="nav-link active" id="address-nav" data-toggle="pill" href="/Account/UserAddress/Index" role="tab" aria-controls="address-tab" aria-selected="true"><i class="fa fa-map-marker-alt"></i>Address</a>
+                    <a class="nav-link" id="account-nav" href="/Account/UserAccountDetail/Index" role="tab"><i class="fa fa-user"></i>Account Details</a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
+                        <div class="table-responsive">
+                            <form method="post">
+                                <input type="hidden" asp-for="Id" />
+                                <div class="mb-3">
+                                    <label for="firstName" class="form-label">Ad</label>
+                                    <input type="text" class="form-control" id="firstName" asp-for="FirstName">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="lastName" class="form-label">Soyad</label>
+                                    <input type="text" class="form-control" id="lastName" asp-for="LastName">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Telefon</label>
+                                    <input type="text" class="form-control" id="phone" asp-for="Phone">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="addressTitle" class="form-label">Adres Başlığı</label>
+                                    <input type="text" class="form-control" id="addressTitle" asp-for="AddressTitle">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="country" class="form-label">Ülke</label>
+                                    <input type="text" class="form-control" id="country" asp-for="Country">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="city" class="form-label">İl</label>
+                                    <input type="text" class="form-control" id="city" asp-for="City">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="district" class="form-label">İlçe</label>
+                                    <input type="text" class="form-control" id="district" asp-for="District">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="detail" class="form-label">Detay</label>
+                                    <input type="text" class="form-control" id="detail" asp-for="Detail">
+                                </div>
+                                <br />
+                                <center>
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </center>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
