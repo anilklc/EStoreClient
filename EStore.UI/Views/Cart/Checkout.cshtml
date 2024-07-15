@@ -1,5 +1,32 @@
-﻿@{
-    ViewData["Title"] = "Index";
+﻿@using EStore.Dto.Address
+
+@model ResultAddress
+@{
+    ViewData["Title"] = "Checkout";
     Layout = "~/Views/UILayout/Index.cshtml";
 }
-<h1>test</h1>
+
+<div class="login">
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-6">
+                <div class="login-form">
+                    <form id="checkoutForm" method="post">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Please select address</label>
+                                @Html.DropDownListFor(x => x.Id, (List<SelectListItem>)ViewBag.addressValues, new { @class = "form-control" })
+                            </div>
+
+                            <div class="col-md-12">
+                                <button type="button" class="btn" id="checkoutButton">Checkout</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/EStore/js/cart/checkout.js"></script>

@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="cart-btn">
                                     <button class="btn clear-cart">Clear Cart</button>
-                                    <button class="btn checkout-cart" id="checkoutButton">Checkout</button>
+                                    <button id="checkoutButton" class="btn checkoutt-btn">Checkout</button>
 
                                 </div>
                             </div>
@@ -50,48 +50,18 @@
         </div>
     </div>
 </div>
-
 <script>
-    function getAllLocalStorageData() {
-        var localStorageData = {};
-
-        for (var i = 0; i < localStorage.length; i++) {
-            var key = localStorage.key(i);
-            var value = localStorage.getItem(key);
-            localStorageData[key] = value;
-        }
-
-        return localStorageData;
-    }
-
     document.getElementById('checkoutButton').addEventListener('click', function () {
+        var cartItems = localStorage.getItem('cartItems');
 
-        var allData = getAllLocalStorageData();
-
-
-        fetch('/Cart/AddItems', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(allData)
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Veriler başarıyla gönderildi:', data);
-
-                localStorage.clear();
-   
-            })
-            .catch(error => {
-                /
-                console.error('Hata oluştu:', error);
-            });
+        if (cartItems && JSON.parse(cartItems).length > 0) {
+            window.location.href = '/Cart/Checkout';
+        } else {
+            window.location.href = '/Products/Index';
+        }
     });
 
-
 </script>
-
 <script src="~/EStore/js/cart/cart.js"></script>
 
 

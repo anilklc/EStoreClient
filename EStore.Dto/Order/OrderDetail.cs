@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace EStore.Dto.Order
 {
-    public class CartItemList
+    public class OrderDetail
     {
         public string ProductId { get; set; }
         public string ProductName { get; set; }
-        public string ProductCoverImage { get; set; }
         public decimal ProductPrice { get; set; }
         public int ProductAmount { get; set; }
-        public decimal ProductTotal { get; set; }
+        public decimal ProductTotalPrice { get; set; }
 
     }
 }
