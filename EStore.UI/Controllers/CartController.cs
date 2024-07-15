@@ -32,7 +32,6 @@ namespace EStore.UI.Controllers
             return View();
         }
 
-
         [HttpGet]
         public async Task<IActionResult> Checkout()
         {
@@ -101,7 +100,6 @@ namespace EStore.UI.Controllers
             return Ok(new { success = true });
         }
 
-       
     }
 }
 

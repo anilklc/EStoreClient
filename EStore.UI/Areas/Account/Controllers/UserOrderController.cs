@@ -11,20 +11,38 @@ namespace EStore.UI.Areas.Account.Controllers
     public class UserOrderController : Controller
     {
         private readonly IReadService<UserOrderResult> _readService;
+        private readonly IReadService<OrderDetail> _orderDetailReadService;
 
-        public UserOrderController(IReadService<UserOrderResult> readService)
+        public UserOrderController(IReadService<UserOrderResult> readService, IReadService<OrderDetail> orderDetailReadService)
         {
             _readService = readService;
+            _orderDetailReadService = orderDetailReadService;
         }
 
         [HttpGet("Index")]
-       
+
+        public async Task<IActionResult> Index()
+        {
+            var orders = await _readService.GetAll($"Orders/GetAllOrderByUserId/{UserHelper.GetUserName(HttpContext)}/ /", "orders");
+            return View(orders);
+        }
+
+        [HttpGet("[action]/{status}")]
+
         public async Task<IActionResult> Index(string status)
         {
-            var orders = string.IsNullOrEmpty(status) ? 
+            var orders = string.IsNullOrEmpty(status) ?
                 await _readService.GetAll($"Orders/GetAllOrderByUserId/{UserHelper.GetUserName(HttpContext)}/ /", "orders") :
                 await _readService.GetAll($"Orders/GetAllOrderByUserId/{UserHelper.GetUserName(HttpContext)}/{status}/", "orders");
             return View(orders);
         }
+
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> OrderDetail(string id)
+        {
+            var orderDetails = await _orderDetailReadService.GetAll($"OrderDetails/GetAllOrderByOrderId/{id}/", "orderDetails");
+            return View(orderDetails);
+        }
+
     }
 }
