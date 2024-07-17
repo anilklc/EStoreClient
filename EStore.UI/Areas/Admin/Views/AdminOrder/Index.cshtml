@@ -1,0 +1,58 @@
+﻿@model List<ResultOrder>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row justify-content-center">
+        <div class="col-md-12 text-center">
+            <div class="bg-secondary rounded p-4">
+                <h6 class="mb-4 text-center">Order Edit Page</h6>
+                <div class="text-center">
+                    <a href="/Admin/AdminOrder/Index" class="btn btn-success btn-sm">All</a>
+                    <a href="/Admin/AdminOrder/Index/Placed" class="btn btn-success btn-sm">Placed</a>
+                    <a href="/Admin/AdminOrder/Index/Preparing" class="btn btn-success btn-sm">Preparing</a>
+                    <a href="/Admin/AdminOrder/Index/Shipped" class="btn btn-success btn-sm">Shipped</a>
+                    <a href="/Admin/AdminOrder/Index/Completed" class="btn btn-success btn-sm">Completed</a>
+                    <a href="/Admin/AdminOrder/Index/Cancelled" class="btn btn-success btn-sm">Cancelled</a>
+                </div>
+                <br/>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Order Id</th>
+                            <th>Order Total Price</th>
+                            <th>Order Date</th>
+                            <th>Order Status</th>
+                            <th>Order Status Edit</th>
+                            <th>Order Cargo Tracking</th>
+                            <th>Order Cargo Tracking Edit</th>
+                            <th>Order Detail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            count++;
+                            <tr>
+                                <td>@count</td>
+                                <td>@item.Id</td>
+                                <td>@item.TotalPrice</td>
+                                <td>@item.CreatedDate</td>
+                                <td>@item.OrderStatus</td>
+                                <td><a class="btn btn-light btn-sm" href="/Admin/AdminOrder/UpdateOrderStatus/@item.Id">Update Status</a></td>
+                                <td>@item.CargoTracking</td>
+                                <td><a class="btn btn-light btn-sm" href="/Admin/AdminOrder/UpdateOrderCargo/@item.Id">Update Cargo</a></td>
+                                <td><a class="btn btn-info btn-sm" href="/Admin/AdminOrderDetail/Index/@item.Id">Go Order Detail</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

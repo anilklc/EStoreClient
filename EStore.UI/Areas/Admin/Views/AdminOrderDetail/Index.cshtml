@@ -1,0 +1,47 @@
+﻿@model List<OrderDetail>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row justify-content-center">
+        <div class="col-md-12 text-center">
+            <div class="bg-secondary rounded p-4">
+                <h6 class="mb-4 text-center">Brand Images Edit Page</h6>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Product Id</th>
+                            <th>Product Name/Size</th>
+                            <th>Product Price</th>
+                            <th>Product Amount</th>
+                            <th>Product Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            count++;
+                            <tr>
+                                <td>@count</td>
+                                <td>@item.ProductId</td>
+                                <td>@item.ProductName</td>
+                                <td>@item.ProductPrice</td>
+                                <td>@item.ProductAmount</td>
+                                <td>@item.ProductTotalPrice</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="text-center">
+                    <a href="/Admin/AdminOrder/Index/" class="btn btn-success btn-sm">Go Back Order</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,28 @@
+﻿@model UpdateOrderStatus
+@{
+    ViewData["Title"] = "UpdateOrderStatus";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row vh-100 bg-secondary rounded ">
+        <div class="col-md-12">
+            <div class="col-sm-12 col-xl-12">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Update Product</h6>
+                    <p class="card-subtitle mb-4">Please fill in the information about the vehicle completely.</p>
+                    <form method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="mb-3">
+                            <label for="exampleInputStatus" class="form-label">Status</label>
+                            @Html.DropDownListFor(x => x.OrderStatus, (List<SelectListItem>)ViewBag.StatusValues, new { @class = "form-control" })
+                        </div>
+                        <div class="text-center">
+                        <button type="submit" class="btn btn-success">Update Order Status</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
