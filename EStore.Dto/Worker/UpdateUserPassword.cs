@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EStore.Dto.User
+namespace EStore.Dto.Worker
 {
-    public class PasswordUpdate
+    public class UpdateUserPassword
     {
         public string Username { get; set; }
         public string Password { get; set; }

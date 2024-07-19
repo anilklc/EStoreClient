@@ -1,0 +1,62 @@
+﻿@using EStore.Dto.Worker
+@model CreateUser
+@{
+    ViewData["Title"] = "CreateUser";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row bg-secondary rounded">
+        <div class="col-md-12">
+            <div class="col-sm-12 col-xl-12">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Create User</h6>
+                    <p class="card-subtitle mb-4">Please fill in the information worker the vehicle completely.</p>
+                    <form method="post">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="exampleInputFirstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="exampleInputFirstName" asp-for="FirstName" aria-describedby="FirstName">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="exampleInputLastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="exampleInputLastName" asp-for="LastName" aria-describedby="LastName">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="exampleInputUsername" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="exampleInputUsername" asp-for="Username" aria-describedby="Username">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="exampleInputEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="exampleInputEmail" asp-for="Email" aria-describedby="Email">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="exampleInputPhone" class="form-label">Phone</label>
+                                <input type="text" class="form-control" id="exampleInputPhone" asp-for="Phone" aria-describedby="Phone">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="exampleInputPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword" asp-for="Password" aria-describedby="Password">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="exampleInputPasswordConfirm" class="form-label">Password Confirm</label>
+                                <input type="password" class="form-control" id="exampleInputPasswordConfirm" asp-for="PasswordConfirm" aria-describedby="PasswordConfirm">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="exampleInputUserRole" class="form-label">User Role</label>
+                                @Html.DropDownListFor(x => x.UserRole, (List<SelectListItem>)ViewBag.RoleValues, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success">Create User</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

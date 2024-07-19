@@ -1,0 +1,51 @@
+﻿@using EStore.Dto.Worker
+@model List<ResultUser>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row justify-content-center">
+        <div class="col-md-12 text-center">
+            <div class="bg-secondary rounded p-4">
+                <h6 class="mb-4 text-center">Worker Edit Page</h6>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>UserName</th>
+                            <th>Email</th>
+                            <th>Update Role</th>
+                            <th>Update Password</th>
+                            <th>Remove</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            count++;
+                            <tr>
+                                <td>@count</td>
+                                <td>@item.FirstName</td>
+                                <td>@item.LastName</td>
+                                <td>@item.Username</td>
+                                <td>@item.Email</td>
+                                <td><a class="btn btn-light btn-sm" href="/Admin/AdminWorker/UpdateUser/@item.Id">Update Role</a></td>
+                                <td><a class="btn btn-info btn-sm" href="/Admin/AdminWorker/UpdateUserPassword/@item.Id">Update Password</a></td>
+                                <td><a class="btn btn-danger btn-sm" href="/Admin/AdminWorker/RemoveUser/@item.Id">Remove</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="text-center">
+                    <a href="/Admin/AdminWorker/CreateUser/" class="btn btn-success btn-sm">Create Worker</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

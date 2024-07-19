@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EStore.Dto.User
+namespace EStore.Dto.Worker
 {
-    public class PasswordUpdate
+    public class UpdateUserRole
     {
+        public string Id { get; set; }
         public string Username { get; set; }
-        public string Password { get; set; }
-        public string PasswordConfrim { get; set; }
+        public string Role { get; set; }
     }
 }

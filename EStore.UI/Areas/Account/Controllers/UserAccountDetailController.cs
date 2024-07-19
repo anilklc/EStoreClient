@@ -29,7 +29,7 @@ namespace EStore.UI.Areas.Account.Controllers
         [HttpPost("Index")]
         public async Task<IActionResult> Index(PasswordUpdate passwordUpdate)
         {
-            passwordUpdate.UserName = UserHelper.GetUserName(HttpContext);
+            passwordUpdate.Username = UserHelper.GetUserName(HttpContext);
             var result = await _writeService.AddAsync(passwordUpdate, "Users/UpdatePassword/");
             return RedirectToAction(nameof(Index));
         }
