@@ -9,6 +9,7 @@ namespace EStore.Dto.Worker
     public class UpdateUserRole
     {
         public string Id { get; set; }
+        public string Authorized { get; set; }
         public string Username { get; set; }
         public string Role { get; set; }
     }

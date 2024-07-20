@@ -8,6 +8,8 @@ namespace EStore.Dto.Worker
 {
     public class CreateUser
     {
+        public string AuthorizedRole { get; set; }
+        public string Authorized { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }

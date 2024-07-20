@@ -27,5 +27,17 @@ namespace EStore.Services.Helper
             }
             return null;
         }
+
+        public static string GetUserRole(HttpContext httpContext)
+        {
+
+            var accessToken = httpContext.Request.Cookies["AccessToken"];
+            if (!string.IsNullOrEmpty(accessToken))
+            {
+                var userRoleClaim = httpContext.User.FindFirst(ClaimTypes.Role);
+                return userRoleClaim?.Value;
+            }
+            return null;
+        }
     }
 }

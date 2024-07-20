@@ -1,10 +1,13 @@
 ﻿using EStore.Dto.Role;
 using EStore.Dto.User;
 using EStore.Dto.Worker;
+using EStore.Services.Helper;
 using EStore.Services.Interfaces;
+using EStore.Services.Services;
 using EStore.UI.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using NuGet.Configuration;
 
 namespace EStore.UI.Areas.Admin.Controllers
 {
@@ -46,6 +49,8 @@ namespace EStore.UI.Areas.Admin.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateUser(CreateUser createUser)
         {
+            createUser.AuthorizedRole = UserHelper.GetUserRole(HttpContext);
+            createUser.Authorized = UserHelper.GetUserName(HttpContext);
             var result = await HandleServiceAction(async () => await _writeService.AddAsync(createUser, "Users/CreateUserAdmin"), "User creation successful.", "User creation failed.");
             return RedirectToAction(nameof(Index));
         }
@@ -53,7 +58,9 @@ namespace EStore.UI.Areas.Admin.Controllers
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> RemoveUser(string id)
         {
-            var result = await HandleServiceAction(async () => await _writeService.DeleteAsync(id, "Users/RemoveUser/"), "User removal successful.", "User removal failed.");
+            string authorizedRole = UserHelper.GetUserRole(HttpContext);
+            string authorized = UserHelper.GetUserName(HttpContext);
+            var result = await HandleServiceAction(async () => await _writeService.DeleteAsync($"{id}/{authorizedRole}/{authorized}", "Users/RemoveUser/"), "User removal successful.", "User removal failed.");
             return RedirectToAction(nameof(Index));
         }
 
@@ -81,6 +88,7 @@ namespace EStore.UI.Areas.Admin.Controllers
         [HttpPost("[action]/{id}")]
         public async Task<IActionResult> UpdateUser(UpdateUserRole updateUserRole)
         {
+            updateUserRole.Authorized = UserHelper.GetUserName(HttpContext);
             var result = await HandleServiceAction(async () => await _writeService.AddAsync(updateUserRole, "Roles/AddRoleUser/"), "User update successful.", "User update failed.");
             return RedirectToAction(nameof(Index));
         }
@@ -99,6 +107,7 @@ namespace EStore.UI.Areas.Admin.Controllers
         [HttpPost("[action]/{id}")]
         public async Task<IActionResult> UpdateUserPassword(UpdateUserPassword updateUserPassword)
         {
+            updateUserPassword.Authorized = UserHelper.GetUserName(HttpContext);
             var result = await HandleServiceAction(async () => await _writeService.AddAsync(updateUserPassword, "Users/UpdatePassword"), "User update successful.", "User update failed.");
             return RedirectToAction(nameof(Index));
         }
