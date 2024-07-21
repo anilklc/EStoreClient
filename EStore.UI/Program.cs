@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,12 +22,18 @@ builder.Services.AddSession(options =>
 });
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
+    .AddCookie("AdminCookie",options =>
     {
         options.Cookie.Name = "AccessToken";
         options.Cookie.HttpOnly = true;
         options.Cookie.SameSite = SameSiteMode.Strict;
         options.LoginPath = "/Admin/AdminLogin/Index";
+    }).AddCookie("AccountCookie", options=>
+    {
+        options.Cookie.Name = "AccessToken";
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SameSite = SameSiteMode.Strict;
+        options.LoginPath = "/Login/Index";
     });
 
 builder.Services.AddHttpClient();

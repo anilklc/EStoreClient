@@ -8,7 +8,7 @@ namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminProductImage")]
-    [Authorize(Roles = "Admin,Editor")]
+    [Authorize(Roles = "Admin,Editor", AuthenticationSchemes = "AdminCookie")]
     public class AdminProductImageController : BaseController
     {
         private readonly IWriteService<CreateProductImage, UpdateProductImage> _writeService;

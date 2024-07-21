@@ -9,7 +9,7 @@ namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminAccount")]
-    [Authorize(Roles = "Admin,Editor")]
+    [Authorize(Roles = "Admin,Editor", AuthenticationSchemes = "AdminCookie")]
     public class AdminAccountController : BaseController
     {
         private readonly ILoginService<Logout> _loginService;

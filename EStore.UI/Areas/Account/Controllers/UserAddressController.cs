@@ -9,6 +9,7 @@ namespace EStore.UI.Areas.Account.Controllers
 {
     [Area("Account")]
     [Route("Account/UserAddress")]
+    [Authorize(Roles = "User", AuthenticationSchemes = "AccountCookie")]
 
     public class UserAddressController : Controller
     {

@@ -9,6 +9,7 @@ namespace EStore.UI.Areas.Account.Controllers
 {
     [Area("Account")]
     [Route("Account/UserAccountDetail")]
+    [Authorize(Roles = "User", AuthenticationSchemes = "AccountCookie")]
     public class UserAccountDetailController : Controller
     {
         private readonly IWriteService<PasswordUpdate, PasswordUpdate> _writeService;

@@ -10,7 +10,7 @@ namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminReview")]
-    [Authorize(Roles = "Admin,Editor")]
+    [Authorize(Roles = "Admin,Editor", AuthenticationSchemes = "AdminCookie")]
     public class AdminReviewController : BaseController
     {
         private readonly IWriteService<CreateReview, UpdateReview> _writeService;

@@ -9,7 +9,7 @@ namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminPolicy")]
-    [Authorize(Roles = "Admin,Editor")]
+    [Authorize(Roles = "Admin,Editor", AuthenticationSchemes = "AdminCookie")]
     public class AdminPolicyController : BaseController
     {
         private readonly IWriteService<CreatePolicy, UpdatePolicy> _writeService;

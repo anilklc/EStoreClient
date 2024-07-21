@@ -10,7 +10,7 @@ namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminProductStock")]
-    [Authorize(Roles = "Admin,Editor")]
+    [Authorize(Roles = "Admin,Editor", AuthenticationSchemes = "AdminCookie")]
     public class AdminProductStockController : BaseController
     {
         private readonly IWriteService<CreateStock, UpdateStock> _writeService;

@@ -8,7 +8,7 @@ namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminAnnouncement")]
-    [Authorize(Roles = "Admin,Editor")]
+    [Authorize(Roles = "Admin,Editor", AuthenticationSchemes = "AdminCookie")]
     public class AdminAnnouncementController : BaseController
     {
         private readonly IWriteService<CreateAnnouncement, UpdateAnnouncement> _writeService;
