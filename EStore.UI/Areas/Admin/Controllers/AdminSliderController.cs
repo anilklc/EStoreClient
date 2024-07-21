@@ -3,6 +3,7 @@ using EStore.Dto.Slider;
 using EStore.Dto.Slider;
 using EStore.Services.Interfaces;
 using EStore.UI.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EStore.UI.Areas.Admin.Controllers
@@ -10,6 +11,7 @@ namespace EStore.UI.Areas.Admin.Controllers
 
     [Area("Admin")]
     [Route("Admin/AdminSlider")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminSliderController : BaseController
     {
         private readonly IWriteService<CreateSlider, UpdateSlider> _writeService;

@@ -3,12 +3,14 @@ using EStore.Dto.Review;
 using EStore.Dto.Review;
 using EStore.Services.Interfaces;
 using EStore.UI.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminReview")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminReviewController : BaseController
     {
         private readonly IWriteService<CreateReview, UpdateReview> _writeService;

@@ -5,6 +5,7 @@ using EStore.Services.Helper;
 using EStore.Services.Interfaces;
 using EStore.Services.Services;
 using EStore.UI.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NuGet.Configuration;
@@ -13,6 +14,7 @@ namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminWorker")]
+    [Authorize(Roles = "Admin")]
     public class AdminWorkerController : BaseController
     {
         private readonly IWriteService<object, UpdateUserRole> _writeService;

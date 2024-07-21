@@ -1,4 +1,5 @@
 ﻿using EStore.Dto.Login;
+using EStore.Dto.User;
 using EStore.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
@@ -8,10 +9,12 @@ namespace EStore.UI.Controllers
     public class LoginController : Controller
     {
         private readonly ILoginService<LoginResponse> _loginService;
+        private readonly IWriteService<object, UpdateFargotPassword> _writeService;
 
-        public LoginController(ILoginService<LoginResponse> loginService)
+        public LoginController(ILoginService<LoginResponse> loginService, IWriteService<object, UpdateFargotPassword> writeService)
         {
             _loginService = loginService;
+            _writeService = writeService;
         }
 
         public IActionResult Index()
@@ -44,6 +47,43 @@ namespace EStore.UI.Controllers
 
             ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             return View(loginRequest);
+        }
+
+        [HttpGet]
+        public IActionResult FargotPassword()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FargotPassword(FargotPassword fargotPassword)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var result = await _writeService.AddAsync(fargotPassword, "Auth/PasswordReset");
+            return RedirectToAction("Index", "Default");
+        }
+
+        [HttpGet("[action]/{id}/{resetToken}")]
+        public IActionResult UpdatePassword(string id,string resetToken)
+        {
+             return View();
+        }
+
+        [HttpPost("[action]/{id}/{resetToken}")]
+        public async Task<IActionResult> UpdatePassword(UpdateFargotPassword updateFargotPassword)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var result = await _writeService.AddAsync(updateFargotPassword, "Auth/FargotPassword");
+            return RedirectToAction("Index", "Default");
         }
     }
 }

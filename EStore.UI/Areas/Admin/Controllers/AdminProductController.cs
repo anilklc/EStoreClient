@@ -3,6 +3,7 @@ using EStore.Dto.Product;
 using EStore.Dto.Product;
 using EStore.Services.Interfaces;
 using EStore.UI.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json.Linq;
@@ -11,6 +12,7 @@ namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminProduct")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminProductController : BaseController
     {
         private readonly IWriteService<CreateProduct, object> _writeService;

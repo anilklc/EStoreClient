@@ -1,12 +1,14 @@
 ﻿using EStore.Dto.About;
 using EStore.Services.Interfaces;
 using EStore.UI.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminAbout")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminAboutController : BaseController
     {
         private readonly IWriteService<CreateAbout, UpdateAbout> _writeService;

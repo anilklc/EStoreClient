@@ -1,6 +1,7 @@
 ﻿using EStore.Dto.Policies;
 using EStore.Services.Interfaces;
 using EStore.UI.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminPolicy")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminPolicyController : BaseController
     {
         private readonly IWriteService<CreatePolicy, UpdatePolicy> _writeService;

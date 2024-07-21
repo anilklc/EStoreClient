@@ -1,12 +1,14 @@
 ﻿using EStore.Dto.SliderImage;
 using EStore.Services.Interfaces;
 using EStore.UI.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminSliderImage")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminSliderImageController : BaseController
     {
         private readonly IWriteService<CreateSliderImage, UpdateSliderImage> _writeService;

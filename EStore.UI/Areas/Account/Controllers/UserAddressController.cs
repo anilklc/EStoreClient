@@ -2,12 +2,14 @@
 using EStore.Dto.Address;
 using EStore.Services.Helper;
 using EStore.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EStore.UI.Areas.Account.Controllers
 {
     [Area("Account")]
     [Route("Account/UserAddress")]
+
     public class UserAddressController : Controller
     {
         private readonly IWriteService<CreateAddress, UpdateAddress> _writeService;

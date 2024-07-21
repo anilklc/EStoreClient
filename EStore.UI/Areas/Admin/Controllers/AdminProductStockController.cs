@@ -3,12 +3,14 @@ using EStore.Dto.Footer;
 using EStore.Dto.Stock;
 using EStore.Services.Interfaces;
 using EStore.UI.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminProductStock")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminProductStockController : BaseController
     {
         private readonly IWriteService<CreateStock, UpdateStock> _writeService;

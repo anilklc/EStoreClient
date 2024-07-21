@@ -2,11 +2,13 @@
 using EStore.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using EStore.UI.Controllers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminBrand")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminBrandController : BaseController
     {
         private readonly IWriteService<CreateBrand, UpdateBrand> _writeService;

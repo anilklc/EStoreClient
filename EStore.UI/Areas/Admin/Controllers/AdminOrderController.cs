@@ -4,6 +4,7 @@ using EStore.Dto.OrderStatus;
 using EStore.Services.Helper;
 using EStore.Services.Interfaces;
 using EStore.UI.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -11,6 +12,7 @@ namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminOrder")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminOrderController : BaseController
     {
         private readonly IWriteService<UpdateOrderCargo, object> _writeService;

@@ -1,12 +1,14 @@
 ﻿using EStore.Dto.Footer;
 using EStore.Services.Interfaces;
 using EStore.UI.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminFooter")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminFooterController : BaseController
     {
         private readonly IWriteService<CreateFooter, UpdateFooter> _writeService;

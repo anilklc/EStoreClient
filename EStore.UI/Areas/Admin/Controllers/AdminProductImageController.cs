@@ -1,12 +1,14 @@
 ﻿using EStore.Dto.ProductImage;
 using EStore.Services.Interfaces;
 using EStore.UI.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminProductImage")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminProductImageController : BaseController
     {
         private readonly IWriteService<CreateProductImage, UpdateProductImage> _writeService;

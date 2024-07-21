@@ -1,12 +1,14 @@
 ﻿using EStore.Dto.Order;
 using EStore.Services.Interfaces;
 using EStore.UI.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminOrderDetail")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminOrderDetailController : BaseController
     {
 

@@ -1,12 +1,14 @@
 ﻿using EStore.Dto.Announcement;
 using EStore.Services.Interfaces;
 using EStore.UI.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminAnnouncement")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminAnnouncementController : BaseController
     {
         private readonly IWriteService<CreateAnnouncement, UpdateAnnouncement> _writeService;

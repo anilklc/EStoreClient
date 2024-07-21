@@ -2,6 +2,7 @@
 using EStore.Dto.User;
 using EStore.Services.Helper;
 using EStore.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EStore.UI.Areas.Account.Controllers

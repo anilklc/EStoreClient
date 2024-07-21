@@ -2,12 +2,14 @@
 using EStore.Dto.SocialMedia;
 using EStore.Services.Interfaces;
 using EStore.UI.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminSocialMedia")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminSocialMediaController : BaseController
     {
         private readonly IWriteService<CreateSocialMedia, UpdateSocialMedia> _writeService;

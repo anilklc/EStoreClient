@@ -5,12 +5,14 @@ using EStore.UI.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.Reflection;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminBrandImage")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminBrandImageController : BaseController
     {
         private readonly IWriteService<CreateBrandImage, UpdateBrandImage> _writeService;
