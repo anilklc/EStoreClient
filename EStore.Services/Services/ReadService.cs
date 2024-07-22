@@ -64,6 +64,13 @@ namespace EStore.Services
         public async Task<TEntity> Get(string apiUrl,string id)
         {
             var response = await _httpClient.GetAsync($"{apiUrl}{id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                var accessToken = _httpContextAccessor.HttpContext.Request.Cookies["AccessToken"];
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                response = await _httpClient.GetAsync($"{apiUrl}{id}");
+
+            }
             response.EnsureSuccessStatusCode();
 
             var jsonContent = await response.Content.ReadAsStringAsync();

@@ -1,5 +1,4 @@
 ﻿using EStore.Dto.Role;
-using EStore.Dto.User;
 using EStore.Dto.Worker;
 using EStore.Services.Helper;
 using EStore.Services.Interfaces;
