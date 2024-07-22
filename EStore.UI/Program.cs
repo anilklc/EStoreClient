@@ -22,18 +22,12 @@ builder.Services.AddSession(options =>
 });
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie("AdminCookie",options =>
+    .AddCookie(options =>
     {
         options.Cookie.Name = "AccessToken";
         options.Cookie.HttpOnly = true;
         options.Cookie.SameSite = SameSiteMode.Strict;
-        options.LoginPath = "/Admin/AdminLogin/Index";
-    }).AddCookie("AccountCookie", options=>
-    {
-        options.Cookie.Name = "AccessToken";
-        options.Cookie.HttpOnly = true;
-        options.Cookie.SameSite = SameSiteMode.Strict;
-        options.LoginPath = "/Login/Index";
+        options.LoginPath = "/Default/Index";
     });
 
 builder.Services.AddHttpClient();
@@ -63,7 +57,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Default}/{action=Index}/{id?}");
 
 app.UseEndpoints(endpoints =>
 {

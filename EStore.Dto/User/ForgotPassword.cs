@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EStore.Dto.User
 {
-    public class FargotPassword
+    public class ForgotPassword
     {
         public string Email { get; set; }
     }

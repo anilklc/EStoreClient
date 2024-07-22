@@ -9,7 +9,7 @@ namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminSocialMedia")]
-    [Authorize(Roles = "Admin,Editor", AuthenticationSchemes = "AdminCookie")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminSocialMediaController : BaseController
     {
         private readonly IWriteService<CreateSocialMedia, UpdateSocialMedia> _writeService;

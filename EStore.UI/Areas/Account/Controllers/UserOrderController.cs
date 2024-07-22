@@ -9,7 +9,7 @@ namespace EStore.UI.Areas.Account.Controllers
 {
     [Area("Account")]
     [Route("Account/UserOrder")]
-    [Authorize(Roles = "User", AuthenticationSchemes = "AccountCookie")]
+    [Authorize(Roles = "User")]
     public class UserOrderController : Controller
     {
         private readonly IReadService<UserOrderResult> _readService;

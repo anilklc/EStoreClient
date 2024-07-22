@@ -5,7 +5,7 @@ namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminDashboard")]
-    [Authorize(Roles = "Admin,Editor", AuthenticationSchemes = "AdminCookie")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminDashboardController : Controller
     {
         [Route("Index")]

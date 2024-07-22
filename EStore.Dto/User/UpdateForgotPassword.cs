@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EStore.Dto.User
 {
-    public class UpdateFargotPassword
+    public class UpdateForgotPassword
     {
         public string Id { get; set; }
         public string ResetToken { get; set; }

@@ -8,7 +8,7 @@ namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminOrderDetail")]
-    [Authorize(Roles = "Admin,Editor", AuthenticationSchemes = "AdminCookie")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminOrderDetailController : BaseController
     {
 

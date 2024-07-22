@@ -14,7 +14,7 @@ namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminWorker")]
-    [Authorize(Roles = "Admin", AuthenticationSchemes = "AdminCookie")]
+    [Authorize(Roles = "Admin")]
     public class AdminWorkerController : BaseController
     {
         private readonly IWriteService<object, UpdateUserRole> _writeService;

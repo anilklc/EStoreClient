@@ -5,7 +5,7 @@ namespace EStore.UI.Areas.Account.Controllers
 {
     [Area("Account")]
     [Route("Account/UserDashboard")]
-    [Authorize(Roles = "User", AuthenticationSchemes = "AccountCookie")]
+    [Authorize(Roles = "User")]
     public class UserDashboardController : Controller
     {
 

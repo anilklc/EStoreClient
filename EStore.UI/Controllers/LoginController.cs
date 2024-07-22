@@ -9,9 +9,9 @@ namespace EStore.UI.Controllers
     public class LoginController : Controller
     {
         private readonly ILoginService<LoginResponse> _loginService;
-        private readonly IWriteService<object, UpdateFargotPassword> _writeService;
+        private readonly IWriteService<object, UpdateForgotPassword> _writeService;
 
-        public LoginController(ILoginService<LoginResponse> loginService, IWriteService<object, UpdateFargotPassword> writeService)
+        public LoginController(ILoginService<LoginResponse> loginService, IWriteService<object, UpdateForgotPassword> writeService)
         {
             _loginService = loginService;
             _writeService = writeService;
@@ -50,21 +50,21 @@ namespace EStore.UI.Controllers
         }
 
         [HttpGet]
-        public IActionResult FargotPassword()
+        public IActionResult ForgotPassword()
         {
 
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> FargotPassword(FargotPassword fargotPassword)
+        public async Task<IActionResult> ForgotPassword(Dto.User.ForgotPassword forgotPassword)
         {
             if (!ModelState.IsValid)
             {
                 return View();
             }
 
-            var result = await _writeService.AddAsync(fargotPassword, "Auth/PasswordReset");
+            var result = await _writeService.AddAsync(forgotPassword, "Auth/PasswordReset");
             return RedirectToAction("Index", "Default");
         }
 
@@ -75,14 +75,14 @@ namespace EStore.UI.Controllers
         }
 
         [HttpPost("[action]/{id}/{resetToken}")]
-        public async Task<IActionResult> UpdatePassword(UpdateFargotPassword updateFargotPassword)
+        public async Task<IActionResult> UpdatePassword(UpdateForgotPassword updateForgotPassword)
         {
             if (!ModelState.IsValid)
             {
                 return View();
             }
 
-            var result = await _writeService.AddAsync(updateFargotPassword, "Auth/FargotPassword");
+            var result = await _writeService.AddAsync(updateForgotPassword, "Auth/ForgotPassword");
             return RedirectToAction("Index", "Default");
         }
     }

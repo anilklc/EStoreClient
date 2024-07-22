@@ -11,7 +11,7 @@ namespace EStore.UI.Areas.Admin.Controllers
 
     [Area("Admin")]
     [Route("Admin/AdminSlider")]
-    [Authorize(Roles = "Admin,Editor", AuthenticationSchemes = "AdminCookie")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminSliderController : BaseController
     {
         private readonly IWriteService<CreateSlider, UpdateSlider> _writeService;

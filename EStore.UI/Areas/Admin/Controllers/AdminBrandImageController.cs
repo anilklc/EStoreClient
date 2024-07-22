@@ -12,7 +12,7 @@ namespace EStore.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminBrandImage")]
-    [Authorize(Roles = "Admin,Editor", AuthenticationSchemes = "AdminCookie")]
+    [Authorize(Roles = "Admin,Editor")]
     public class AdminBrandImageController : BaseController
     {
         private readonly IWriteService<CreateBrandImage, UpdateBrandImage> _writeService;
