@@ -48,6 +48,7 @@ Ensure that the EStoreBackend service is running and accessible. Update the API 
 
 ## Screenshots
 
+
 ### Admin Screens
 ![Screenshot 1](Screenshots/1.png)
 ![Screenshot 2](Screenshots/2.png)
@@ -56,26 +57,32 @@ Ensure that the EStoreBackend service is running and accessible. Update the API 
 ![Screenshot 5](Screenshots/5.png)
 ![Screenshot 6](Screenshots/6.png)
 ![Screenshot 7](Screenshots/7.png)
+![Screenshot 8](Screenshots/8.png)
+![Screenshot 8](Screenshots/9.png)
+
+
+### Admin Screens
+
+![Screenshot 10](Screenshots/10.png)
+![Screenshot 1](Screenshots/11.png)
+![Screenshot 12](Screenshots/12.png)
+![Screenshot 13](Screenshots/13.png)
+![Screenshot 14](Screenshots/14.png)
+![Screenshot 15](Screenshots/15.png)
+![Screenshot 16](Screenshots/16.png)
 
 ### User Screens
 
-![Screenshot 1](Screenshots/8.png)
-![Screenshot 2](Screenshots/9.png)
-![Screenshot 3](Screenshots/10.png)
-![Screenshot 4](Screenshots/11.png)
-![Screenshot 5](Screenshots/12.png)
-![Screenshot 6](Screenshots/13.png)
-![Screenshot 7](Screenshots/14.png)
-
-### Public
-
-![Screenshot 1](Screenshots/15.png)
-![Screenshot 2](Screenshots/16.png)
-![Screenshot 3](Screenshots/17.png)
-![Screenshot 4](Screenshots/18.png)
-![Screenshot 5](Screenshots/19.png)
-![Screenshot 6](Screenshots/20.png)
-![Screenshot 7](Screenshots/21.png)
+![Screenshot 17](Screenshots/17.png)
+![Screenshot 18](Screenshots/18.png)
+![Screenshot 19](Screenshots/19.png)
+![Screenshot 20](Screenshots/20.png)
+![Screenshot 21](Screenshots/21.png)
+![Screenshot 22](Screenshots/22.png)
+![Screenshot 23](Screenshots/23.png)
+![Screenshot 24](Screenshots/24.png)
+![Screenshot 25](Screenshots/25.png)
+![Screenshot 26](Screenshots/26.png)
 
 ### License
 
