@@ -49,7 +49,7 @@ Ensure that the EStoreBackend service is running and accessible. Update the API 
 ## Screenshots
 
 
-### Admin Screens
+### Public Screens
 ![Screenshot 1](Screenshots/1.png)
 ![Screenshot 2](Screenshots/2.png)
 ![Screenshot 3](Screenshots/3.png)
@@ -61,7 +61,7 @@ Ensure that the EStoreBackend service is running and accessible. Update the API 
 ![Screenshot 8](Screenshots/9.png)
 
 
-### Admin Screens
+### User Screens
 
 ![Screenshot 10](Screenshots/10.png)
 ![Screenshot 1](Screenshots/11.png)
@@ -71,7 +71,7 @@ Ensure that the EStoreBackend service is running and accessible. Update the API 
 ![Screenshot 15](Screenshots/15.png)
 ![Screenshot 16](Screenshots/16.png)
 
-### User Screens
+### Admin Screens
 
 ![Screenshot 17](Screenshots/17.png)
 ![Screenshot 18](Screenshots/18.png)
